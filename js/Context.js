@@ -35,6 +35,27 @@ blink.listeners = blink.listeners || {};
                 return new blink.interactors.BoardInteractor();
             },
             enumerable: false
+        },
+        getLoginPresenter : {
+            value: function()
+            {
+                return new blink.presenters.LoginPresenter(this);
+            },
+            enumerable: false
+        },
+        getLoginView : {
+            value: function(presenter)
+            {
+                return new blink.views.LoginView(presenter);
+            },
+            enumerable: false
+        },
+        getLoginInteractor : {
+            value: function()
+            {
+                return new blink.interactors.LoginInteractor();
+            },
+            enumerable: false
         }
     });
 
@@ -44,7 +65,8 @@ blink.listeners = blink.listeners || {};
 (function(helpers)
 {
     var list =  {
-                    board : "getBoardPresenter"
+                    board : "getBoardPresenter",
+                    login : "getLoginPresenter"
                 };
 
     function Initializer()

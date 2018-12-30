@@ -16,9 +16,7 @@
 
                 $(document).ready(function ()
                 {
-					$("#boardList").html("");
 					
-                    self.presenter.getList();
                 });
             },
             enumerable: false
@@ -31,11 +29,6 @@
                 {
                     
                 });
-
-                if(data.isLast)
-                {
-                    
-                }
             },
             enumerable: false
         },

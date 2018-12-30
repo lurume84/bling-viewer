@@ -16,7 +16,7 @@
 					url: "" + startAt,
 					dataType: 'json',
 					beforeSend: function(xhr) { 
-						xhr.setRequestHeader("Authorization", "Basic " + btoa(":")); 
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
 					success: function (json)
 					{
