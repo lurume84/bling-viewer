@@ -1,0 +1,129 @@
+html
+{
+    background-color:rgba(255, 255, 255, 0.4);
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+*, *:before, *:after
+{
+    box-sizing: border-box;
+}
+
+#header
+{
+    width:100vw;
+    height:6vh;
+}
+
+#header > ul
+{
+    padding:0;
+    margin:0;
+}
+
+#header > ul > li
+{
+    float:left;
+    list-style-type:none;
+    width:20%;
+    padding: 1vh;
+}
+
+#header > ul > li > div
+{
+  margin-top: 0;
+  padding-bottom: 1vh;
+  border-bottom: 3px solid #dbdbdb;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+#content
+{
+    width:100vw;
+    height:92vh;
+    overflow-y: hidden;
+}
+
+#content > ul
+{
+    width:100%;
+    height:100px;
+    padding:0;
+    margin:0;
+}
+
+#content > ul:nth-child(odd)
+{
+    background-color: whitesmoke;
+}
+
+#content > ul:nth-child(even)
+{
+    background-color: white;
+}
+
+#content > ul > li
+{
+    float:left;
+    list-style-type:none;
+    width:20%;
+    height:100px;
+    overflow-y:auto;
+}
+
+#content > ul > li.rejected
+{
+    display:none;
+}
+
+#content > ul > li > ul
+{
+    padding:0 5px 0 5px;
+    margin:0;
+}
+
+#boardList, #sprintList
+{
+    height:90%;
+}
+
+#boardList, #sprintList
+{
+    float:left;
+    width:47%;
+    margin-left:1%;
+    border:0px;
+    outline:0px;
+}
+
+#sprintList
+{
+    width:32%;
+}
+
+#logo
+{
+    width:17%;
+    float:left;
+}
+
+#loading
+{
+	position:absolute;
+	width:100%;
+	top:64px;
+	display:none;
+}
