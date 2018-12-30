@@ -13,7 +13,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "" + startAt,
+					url: "https://rest-"+ $region +"." + server + "/networks/",
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);

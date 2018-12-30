@@ -13,7 +13,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://" + server + "/login",
+					url: "https://prod." + server + "/login",
 					data: "{\"email\" = \"" + email + "\", \"password\" = \"" + password + "\"}",
 					dataType: 'json',
 					beforeSend: function(xhr) { 

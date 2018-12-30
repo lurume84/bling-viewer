@@ -1,4 +1,4 @@
-var server = "prod.immedia-semi.com";
-var email = ":";
-var password = ":";
+var server = "immedia-semi.com";
+var email = "";
+var password = "";
 var credentials = {region: "", token: ""};
