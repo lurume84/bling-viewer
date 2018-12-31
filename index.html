@@ -12,7 +12,6 @@
         <script src="lib/jquery/jquery.kinetic.min.js"></script>
         <script src="lib/jquery/jquery.easing.js"></script>
         <script src="lib/jquery/jquery.easypiechart.js"></script>
-        <script src="js/Config.js"></script>
         <script src="js/Context.js"></script>
         <script src="js/helpers/Utils.js"></script>
         <script src="js/helpers/BaseDecisionListener.js"></script>
@@ -215,6 +214,9 @@
       </dialog>
     </body>
     <script>
+    var server = "immedia-semi.com";
+    var credentials = {region: "", token: ""};
+
       var initializeConfig = initializeConfig || [];
       initializeConfig.push("login");
       initializeConfig.push("board");
