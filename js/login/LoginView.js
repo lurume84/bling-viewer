@@ -15,8 +15,7 @@
                 var self = this;
 
                 $(document).ready(function ()
-                {
-                    componentHandler.upgradeAllRegistered();
+                {             
                     $("#login")[0].showModal();
                     $("#login form").submit(function(evt)
                     {
@@ -25,6 +24,8 @@
                         self.presenter.login($("#login .user").val(), $("#login .password").val());
                         evt.preventDefault();
                     });
+                    
+                    componentHandler.upgradeAllRegistered();
                 });
             },
             enumerable: false

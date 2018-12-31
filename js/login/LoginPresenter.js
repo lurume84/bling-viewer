@@ -7,7 +7,7 @@
         this.loginView = Context.getLoginView(this);
         this.loginView.init();
 
-        this.boardView = Context.getBoardView(this);
+        this.boardView = Context.getBoardView(Context.getBoardPresenter());
     }
 
     Object.defineProperties(LoginPresenter.prototype,
@@ -20,7 +20,11 @@
                 this.interactor.login(user, password, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        credentials.region = data.region.prde;
+                        $.each( data.region, function( key, value )
+                        {
+                            credentials.region = key;
+                        });
+                        
                         credentials.token = data.authtoken.authtoken;
 
                         self.loginView.load(data);

@@ -10,15 +10,15 @@
 
     Object.defineProperties(BoardPresenter.prototype,
     {
-        getList : {
-            value: function(startAt = 0)
+        getNetwork : {
+            value: function(networkId)
             {
                 var self = this;
                     
-                this.interactor.getList(startAt, new blink.listeners.BaseDecisionListener(
+                this.interactor.getNetwork(networkId, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        self.boardView.load(data);
+                        console.log(data);
                     },
                     function(data)
                     {
