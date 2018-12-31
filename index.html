@@ -196,18 +196,22 @@
       </svg>
       <dialog id="login" class="mdl-dialog">
         <h4 class="mdl-dialog__title">Login</h4>
-        <form>
-        <div class="mdl-dialog__content">
-          <p>
-            Username: <input class="user" type="text" name="email"/><br>
-            Password: <input class="password" type="password" name="password"/>
-          </p>
-        </div>
-        <div class="mdl-dialog__actions">
-          <button type="submit" class="mdl-button submit">Login</button>
-        </div>
-        <div class="progress mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-      </form>
+        <form action="#">
+          <div class="mdl-dialog__content">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input user" type="text" id="userInput"/>
+              <label class="mdl-textfield__label" for="userInput">Username...</label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input password" type="password" id="passwordInput"/>
+                <label class="mdl-textfield__label" for="passwordInput">Password...</label>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="submit" class="mdl-button submit">Login</button>
+          </div>
+          <div class="progress mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        </form>
       </dialog>
     </body>
     <script>

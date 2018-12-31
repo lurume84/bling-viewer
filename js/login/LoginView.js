@@ -16,6 +16,7 @@
 
                 $(document).ready(function ()
                 {
+                    componentHandler.upgradeAllRegistered();
                     $("#login")[0].showModal();
                     $("#login form").submit(function(evt)
                     {
