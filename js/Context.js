@@ -56,7 +56,28 @@ blink.listeners = blink.listeners || {};
                 return new blink.interactors.LoginInteractor();
             },
             enumerable: false
-        }
+        },
+        getCameraPresenter : {
+            value: function()
+            {
+                return new blink.presenters.CameraPresenter(this);
+            },
+            enumerable: false
+        },
+        getCameraView : {
+            value: function(presenter)
+            {
+                return new blink.views.CameraView(presenter);
+            },
+            enumerable: false
+        },
+        getCameraInteractor : {
+            value: function()
+            {
+                return new blink.interactors.CameraInteractor();
+            },
+            enumerable: false
+        },
     });
 
     helpers.Context = Context;
@@ -65,7 +86,6 @@ blink.listeners = blink.listeners || {};
 (function(helpers)
 {
     var list =  {
-                    board : "getBoardPresenter",
                     login : "getLoginPresenter"
                 };
 

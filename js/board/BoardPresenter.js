@@ -1,11 +1,15 @@
 (function(presenters)
 {
+    var ctx;
+    
     function BoardPresenter(Context)
     {
         this.interactor = Context.getBoardInteractor();
        
         this.boardView = Context.getBoardView(this);
         this.boardView.init();
+        
+        this.ctx = Context;
     }
 
     Object.defineProperties(BoardPresenter.prototype,
@@ -18,7 +22,12 @@
                 this.interactor.getNetwork(networkId, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        console.log(data);
+                        self.boardView.onNetwork(data);
+                        
+                        $.each( data.devicestatus, function( key, value )
+                        {
+                            self.ctx.getCameraPresenter().cameraView.load(value);
+                        });
                     },
                     function(data)
                     {

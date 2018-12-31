@@ -93,125 +93,28 @@
     font-weight: 500;
   }
   .layout .navigation .mdl-navigation__link:hover {
-    background-color: #00BCD4;
-    color: #37474F;
+    background-color: #3FA0D6;
+    color: #fff;
   }
-  .navigation .mdl-navigation__link .material-icons {
-    font-size: 24px;
+  .navigation .mdl-navigation__link .fas {
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.56);
-    margin-right: 32px;
+    margin-right: 14px;
   }
   
   .content {
     max-width: 1080px;
   }
-  
-  .charts {
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
-  .chart:nth-child(1) {
-    color: #ACEC00;
-  }
-  .chart:nth-child(2) {
-    color: #00BBD6;
-  }
-  .chart:nth-child(3) {
-    color: #BA65C9;
-  }
-  .chart:nth-child(4) {
-    color: #EF3C79;
-  }
-  .graphs {
-    padding: 16px 32px;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-align-items: stretch;
-        -ms-flex-align: stretch;
-            align-items: stretch;
-  }
-  /* TODO: Find a proper solution to have the graphs
-   * not float around outside their container in IE10/11.
-   * Using a browserhacks.com solution for now.
-   */
-  _:-ms-input-placeholder, :root .graphs {
-    min-height: 664px;
-  }
-  _:-ms-input-placeholder, :root .graph {
-    max-height: 300px;
-  }
-  /* TODO end */
-  .graph:nth-child(1) {
-    color: #00b9d8;
-  }
-  .graph:nth-child(2) {
-    color: #d9006e;
-  }
-  
-  .cards {
-    -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    -webkit-align-content: flex-start;
-        -ms-flex-line-pack: start;
-            align-content: flex-start;
-  }
-  .cards .separator {
-    height: 32px;
-  }
-  .cards .mdl-card__title.mdl-card__title {
-    color: white;
-    font-size: 24px;
-    font-weight: 400;
-  }
-  .cards ul {
-    padding: 0;
-  }
-  .cards h3 {
-    font-size: 1em;
-  }
-  .updates .mdl-card__title {
-    min-height: 200px;
-    background-image: url('images/dog.png');
-    background-position: 90% 100%;
-    background-repeat: no-repeat;
-  }
-  .cards .mdl-card__actions a {
-    color: #00BCD4;
-    text-decoration: none;
-  }
-  
-  .options h3 {
-    margin: 0;
-  }
-  .options .mdl-checkbox__box-outline {
-    border-color: rgba(255, 255, 255, 0.89);
-  }
-  .options ul {
-    margin: 0;
-    list-style-type: none;
-  }
-  .options li {
-    margin: 4px 0;
-  }
-  .options .material-icons {
-    color: rgba(255, 255, 255, 0.89);
-  }
-  .options .mdl-card__actions {
-    height: 64px;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    box-sizing: border-box;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-  }
+  .demo-card-square.mdl-card {
+  width: 320px;
+  height: 283px;
+  margin-right: 10px;
+}
+.demo-card-square > .mdl-card__title {
+  color: #fff;
+  background-color: #3FA0D6;
+  background-size: contain;
+}
   
   #login .progress
   {

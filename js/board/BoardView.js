@@ -12,17 +12,11 @@
         init : {
             value: function()
             {
-                var self = this;
 
-                $(document).ready(function ()
-                {
-					
-                });
             },
             enumerable: false
         },
-
-        load : {
+        onLogin : {
             value: function(data)
             {
                 var self = this;
@@ -31,10 +25,12 @@
                 //$(".drawer .navigation").append("<div class='mdl-layout-spacer'></div>");
                 $.each( data.networks, function( key, value )
                 {
-                    var network = $("<a/>", {class: "mdl-navigation__link", href: "#", "data-id": key, html: "<i class='mdl-color-text--blue-grey-400 material-icons' role='presentation'>inbox</i>" + value.name});
+                    var network = $("<a/>", {class: "mdl-navigation__link", href: "#", "data-name": value.name, "data-id": key, html: "<i class='fas fa-network-wired'></i>" + value.name});
                     
                     network.click(function(evt)
                     {
+                        $(".header > div > span").html($(this).data("name"));
+                        
                         self.presenter.getNetwork($(this).data("id"));
                         evt.preventDefault();
                     });
@@ -44,7 +40,13 @@
             },
             enumerable: false
         },
-
+        onNetwork : {
+            value: function(data)
+            {
+                $(".content").html("");
+            },
+            enumerable: false
+        },
         showError : {
             value: function(data)
             {
