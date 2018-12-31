@@ -31,7 +31,7 @@
             value: function(data)
             {
                 console.log(data);
-
+                $(".avatar-dropdown > span").html($("#login .user").val());
                 $("#login")[0].close();
             },
             enumerable: false
