@@ -213,3 +213,7 @@
             align-items: center;
   }
   
+  #login .progress
+  {
+    display: none;
+  }

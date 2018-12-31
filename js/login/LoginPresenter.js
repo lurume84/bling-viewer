@@ -6,6 +6,8 @@
        
         this.loginView = Context.getLoginView(this);
         this.loginView.init();
+
+        this.boardView = Context.getBoardView(this);
     }
 
     Object.defineProperties(LoginPresenter.prototype,
@@ -22,6 +24,7 @@
                         credentials.token = data.authtoken.authtoken;
 
                         self.loginView.load(data);
+                        self.boardView.load(data);
                     },
                     function(data)
                     {
