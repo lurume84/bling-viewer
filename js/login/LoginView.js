@@ -16,7 +16,12 @@
 
                 $(document).ready(function ()
                 {
-                    self.presenter.login();
+                    $("#login")[0].showModal();
+                    $("#login form").submit(function(evt)
+                    {
+                        self.presenter.login($("#login .user").val(), $("#login .password").val());
+                        evt.preventDefault();
+                    });
                 });
             },
             enumerable: false
@@ -26,6 +31,8 @@
             value: function(data)
             {
                 console.log(data);
+
+                $("#login")[0].close();
             },
             enumerable: false
         },

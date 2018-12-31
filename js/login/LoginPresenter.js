@@ -11,14 +11,14 @@
     Object.defineProperties(LoginPresenter.prototype,
     {
         login : {
-            value: function(startAt = 0)
+            value: function(user, password)
             {
                 var self = this;
                     
-                this.interactor.login(startAt, new blink.listeners.BaseDecisionListener(
+                this.interactor.login(user, password, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        credentials.region = data.region.psobject.properties.name;
+                        credentials.region = data.region.prde;
                         credentials.token = data.authtoken.authtoken;
 
                         self.loginView.load(data);

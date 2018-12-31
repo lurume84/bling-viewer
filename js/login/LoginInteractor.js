@@ -8,13 +8,13 @@
     Object.defineProperties(LoginInteractor.prototype,
     {
         login : {
-            value: function(startAt, listener)
+            value: function(user, password, listener)
             {
 				$.ajax
 				({
 					type: "POST",
 					url: "https://prod." + server + "/login",
-					data: "{\"email\" = \"" + email + "\", \"password\" = \"" + password + "\"}",
+					data: {"email": user, "password": password},
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						

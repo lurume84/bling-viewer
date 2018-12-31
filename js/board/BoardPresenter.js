@@ -19,11 +19,6 @@
                     function(data)
                     {
                         self.boardView.load(data);
-						
-						if(!data.isLast)
-                        {
-                            self.getList(data.values.length);
-                        }
                     },
                     function(data)
                     {

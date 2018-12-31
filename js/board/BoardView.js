@@ -25,7 +25,7 @@
         load : {
             value: function(data)
             {
-                $.each( data.values, function( key, value )
+                $.each( data.summary.psobject.properties.name, function( key, value )
                 {
                     
                 });
