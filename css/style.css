@@ -97,9 +97,14 @@
     color: #fff;
   }
   .navigation .mdl-navigation__link .fas {
-    font-size: 16px;
+    font-size: 14px;
     color: rgba(255, 255, 255, 0.56);
     margin-right: 14px;
+  }
+  
+  .layout .navigation .separator 
+  {
+      margin-left: 10px;
   }
   
   .content {
@@ -115,8 +120,30 @@
   background-color: #3FA0D6;
   background-size: contain;
 }
+
+.demo-card-square.mdl-card .description
+{
+  float: left;
+}
+
+.demo-card-square.mdl-card .icons
+{
+  float: right;
+}
   
-  #login .progress
-  {
+#login .progress
+{
     display: none;
-  }
+}
+
+#login .mdl-dialog__title span
+{
+    color: #3FA0D6;
+    border-top: 3px solid #3FA0D6;
+}
+
+.error
+{
+    font-weight: bold;
+    color: #FF0000;
+}
