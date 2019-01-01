@@ -15,24 +15,24 @@ blink.listeners = blink.listeners || {};
 
     Object.defineProperties(Context.prototype,
     {
-        getBoardPresenter : {
+        getNetworkPresenter : {
             value: function()
             {
-                return new blink.presenters.BoardPresenter(this);
+                return new blink.presenters.NetworkPresenter(this);
             },
             enumerable: false
         },
-        getBoardView : {
+        getNetworkView : {
             value: function(presenter)
             {
-                return new blink.views.BoardView(presenter);
+                return new blink.views.NetworkView(presenter);
             },
             enumerable: false
         },
-        getBoardInteractor : {
+        getNetworkInteractor : {
             value: function()
             {
-                return new blink.interactors.BoardInteractor();
+                return new blink.interactors.NetworkInteractor();
             },
             enumerable: false
         },
@@ -78,6 +78,27 @@ blink.listeners = blink.listeners || {};
             },
             enumerable: false
         },
+        getActivityPresenter : {
+            value: function()
+            {
+                return new blink.presenters.ActivityPresenter(this);
+            },
+            enumerable: false
+        },
+        getActivityView : {
+            value: function(presenter)
+            {
+                return new blink.views.ActivityView(presenter);
+            },
+            enumerable: false
+        },
+        getActivityInteractor : {
+            value: function()
+            {
+                return new blink.interactors.ActivityInteractor();
+            },
+            enumerable: false
+        }
     });
 
     helpers.Context = Context;

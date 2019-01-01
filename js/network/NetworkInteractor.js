@@ -1,11 +1,11 @@
 (function(interactors)
 {
-    function BoardInteractor()
+    function NetworkInteractor()
     {
         
     }
 
-    Object.defineProperties(BoardInteractor.prototype,
+    Object.defineProperties(NetworkInteractor.prototype,
     {
         getNetworks : {
             value: function(listener)
@@ -56,5 +56,5 @@
         
     });
 
-    interactors.BoardInteractor = BoardInteractor;
+    interactors.NetworkInteractor = NetworkInteractor;
 })(blink.interactors);

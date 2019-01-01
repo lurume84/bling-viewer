@@ -3,11 +3,16 @@
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="lib/mdl/material.min.css">
         <link rel="stylesheet" href="lib/fontawesome/css/all.css">
+        <link rel="stylesheet" href="lib/fullcalendar/fullcalendar.min.css">
+        <link rel="stylesheet" href="lib/fullcalendar/fullcalendar.print.min.css" media='print'>
+        <link rel="stylesheet" src="lib/jquery/jquery.timeline/jquery.timeline.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/fonts.css">
         <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/jquery/jquery.timeline/jquery.timeline.min.js"></script>
         <script src="lib/mdl/material.min.js"></script>
         <script src="lib/moment.min.js"></script>
+        <script src="lib/fullcalendar/fullcalendar.min.js"></script>
         <script src="lib/Chart.bundle.min.js"></script>
         <script src="lib/jquery/jquery.kinetic.min.js"></script>
         <script src="lib/jquery/jquery.easing.js"></script>
@@ -15,12 +20,15 @@
         <script src="js/Context.js"></script>
         <script src="js/helpers/Utils.js"></script>
         <script src="js/helpers/BaseDecisionListener.js"></script>
-        <script src="js/board/BoardView.js"></script>
-        <script src="js/board/BoardInteractor.js"></script>
-        <script src="js/board/BoardPresenter.js"></script>
+        <script src="js/network/NetworkView.js"></script>
+        <script src="js/network/NetworkInteractor.js"></script>
+        <script src="js/network/NetworkPresenter.js"></script>
         <script src="js/camera/CameraView.js"></script>
         <script src="js/camera/CameraInteractor.js"></script>
         <script src="js/camera/CameraPresenter.js"></script>
+        <script src="js/activity/ActivityView.js"></script>
+        <script src="js/activity/ActivityInteractor.js"></script>
+        <script src="js/activity/ActivityPresenter.js"></script>
         <script src="js/login/LoginView.js"></script>
         <script src="js/login/LoginInteractor.js"></script>
         <script src="js/login/LoginPresenter.js"></script>
@@ -69,7 +77,12 @@
           </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
-          <div class="mdl-grid content"></div>
+          <div class="mdl-grid content">
+          
+          <div id="my-timeline"></div>
+
+
+          </div>
         </main>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
@@ -140,6 +153,7 @@
       </dialog>
     </body>
     <script>
+   
     var server = "immedia-semi.com";
     var credentials = {region: "", token: ""};
 

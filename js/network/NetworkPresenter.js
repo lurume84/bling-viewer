@@ -2,17 +2,17 @@
 {
     var ctx;
     
-    function BoardPresenter(Context)
+    function NetworkPresenter(Context)
     {
-        this.interactor = Context.getBoardInteractor();
+        this.interactor = Context.getNetworkInteractor();
        
-        this.boardView = Context.getBoardView(this);
-        this.boardView.init();
+        this.networkView = Context.getNetworkView(this);
+        this.networkView.init();
         
         this.ctx = Context;
     }
 
-    Object.defineProperties(BoardPresenter.prototype,
+    Object.defineProperties(NetworkPresenter.prototype,
     {
         getNetwork : {
             value: function(networkId)
@@ -22,7 +22,7 @@
                 this.interactor.getNetwork(networkId, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        self.boardView.onNetwork(data);
+                        self.networkView.onNetwork(data);
                         
                         $.each( data.devicestatus, function( key, value )
                         {
@@ -31,12 +31,12 @@
                     },
                     function(data)
                     {
-                        self.boardView.showError(data);
+                        self.networkView.showError(data);
                     }));
             },
             enumerable: false
         }
     });
 
-    presenters.BoardPresenter = BoardPresenter;
+    presenters.NetworkPresenter = NetworkPresenter;
 })(blink.presenters);

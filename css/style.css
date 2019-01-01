@@ -97,14 +97,23 @@
     color: #fff;
   }
   .navigation .mdl-navigation__link .fas {
-    font-size: 14px;
     color: rgba(255, 255, 255, 0.56);
     margin-right: 14px;
   }
   
+  .navigation .fa-network-wired
+  {
+    font-size: 14px;  
+  }
+  
+  .navigation .fa-running
+  {
+    font-size: 18px;  
+  }
+  
   .layout .navigation .separator 
   {
-      margin-left: 10px;
+      margin-left: 14px;
   }
   
   .content {
@@ -146,4 +155,10 @@
 {
     font-weight: bold;
     color: #FF0000;
+}
+
+.calendar
+{
+    max-width: 900px;
+    margin: 0 auto;
 }

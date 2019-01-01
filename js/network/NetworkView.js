@@ -2,12 +2,12 @@
 {
     var self;
 
-    function BoardView(presenter)
+    function NetworkView(presenter)
     {
         this.presenter = presenter;
     }
 
-    Object.defineProperties(BoardView.prototype,
+    Object.defineProperties(NetworkView.prototype,
     {
         init : {
             value: function()
@@ -56,5 +56,5 @@
         }
     });
 
-    views.BoardView = BoardView;
+    views.NetworkView = NetworkView;
 })(blink.views);
