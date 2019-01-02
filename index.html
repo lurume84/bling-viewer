@@ -3,16 +3,14 @@
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="lib/mdl/material.min.css">
         <link rel="stylesheet" href="lib/fontawesome/css/all.css">
-        <link rel="stylesheet" href="lib/fullcalendar/fullcalendar.min.css">
-        <link rel="stylesheet" href="lib/fullcalendar/fullcalendar.print.min.css" media='print'>
-        <link rel="stylesheet" src="lib/jquery/jquery.timeline/jquery.timeline.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/fonts.css">
+        <link rel="stylesheet" href="lib/jquery/jquery.timeline/jquery.timeline.min.css">
         <script src="lib/jquery/jquery.min.js"></script>
         <script src="lib/jquery/jquery.timeline/jquery.timeline.min.js"></script>
+        <script src="lib/popper.min.js"></script>
         <script src="lib/mdl/material.min.js"></script>
         <script src="lib/moment.min.js"></script>
-        <script src="lib/fullcalendar/fullcalendar.min.js"></script>
         <script src="lib/Chart.bundle.min.js"></script>
         <script src="lib/jquery/jquery.kinetic.min.js"></script>
         <script src="lib/jquery/jquery.easing.js"></script>
@@ -77,12 +75,7 @@
           </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
-          <div class="mdl-grid content">
-          
-          <div id="my-timeline"></div>
-
-
-          </div>
+          <div class="mdl-grid content"></div>
         </main>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">
@@ -153,18 +146,17 @@
       </dialog>
     </body>
     <script>
-   
-    var server = "immedia-semi.com";
-    var credentials = {region: "", token: ""};
+        var server = "immedia-semi.com";
+        var credentials = {region: "", token: ""};
 
-      var initializeConfig = initializeConfig || [];
-      initializeConfig.push("login");
-      initializeConfig.push("board");
-      initializeConfig.push("camera");
+        var initializeConfig = initializeConfig || [];
+        initializeConfig.push("login");
+        initializeConfig.push("board");
+        initializeConfig.push("camera");
 
-      (function()
-      {
-          new blink.helpers.Initializer();
-      })();
+        (function()
+        {
+            new blink.helpers.Initializer();
+        })();
     </script>
 </html>

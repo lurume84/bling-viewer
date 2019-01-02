@@ -118,6 +118,8 @@
   
   .content {
     max-width: 1080px;
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    overflow: auto;
   }
   .demo-card-square.mdl-card {
   width: 320px;
@@ -143,6 +145,11 @@
 #login .progress
 {
     display: none;
+}
+
+.content .progress
+{
+    width:100%;
 }
 
 #login .mdl-dialog__title span
