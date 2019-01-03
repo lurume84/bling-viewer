@@ -15,7 +15,7 @@
  */
 
  html, body {
-    font-family: 'Roboto', 'Helvetica', sans-serif;
+    font-family: 'Roboto', 'Helvetica', sans-serif !important;
   }
   .avatar {
     width: 48px;
@@ -119,8 +119,14 @@
   .content {
     max-width: 1080px;
     font-family: 'Roboto', 'Helvetica', sans-serif;
-    overflow: auto;
+    box-sizing: border-box;
   }
+  
+  .content .timeline
+  {
+      overflow-x: auto;
+  }
+  
   .demo-card-square.mdl-card {
   width: 320px;
   height: 283px;
@@ -168,4 +174,10 @@
 {
     max-width: 900px;
     margin: 0 auto;
+}
+
+.avatar-icon .rounded
+{
+    width: 80px;
+    height:auto;
 }
