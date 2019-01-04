@@ -74,23 +74,6 @@
                     }));
             },
             enumerable: false
-        },
-        getVideosPage : {
-            value: function(i = 0)
-            {
-                var self = this;
-                
-                this.interactor.getVideos(i, new blink.listeners.BaseDecisionListener(
-                    function(data)
-                    {
-                        self.activityView.load(data);
-                    },
-                    function(data)
-                    {
-                        self.activityView.showError(data);
-                    }));
-            },
-            enumerable: false
         }
     });
 
