@@ -55,18 +55,34 @@
             enumerable: false
         },
         getVideos : {
-            value: function(i = 0)
+            value: function(page, callback)
             {
                 var self = this;
                 
-                this.interactor.getVideos(i, new blink.listeners.BaseDecisionListener(
+                return this.interactor.getVideos(page, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        if(data.length > 0)
+                        self.getVideosCount(function(count)
                         {
-                            self.activityView.load(data);
-                            self.getVideos(i + 1);
-                        }
+                            callback(data, count.count);
+                        });
+                    },
+                    function(data)
+                    {
+                        self.activityView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
+        getVideosCount : {
+            value: function(callback)
+            {
+                var self = this;
+                
+                return this.interactor.getVideosCount(new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        callback(data);
                     },
                     function(data)
                     {

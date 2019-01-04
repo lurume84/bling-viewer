@@ -37,106 +37,178 @@
         onCameras : {
             value: function(data)
             {
-                this.initTimeline(data);
+                this.initTable(data);
             },
             enumerable: false
         },
-        initTimeline : {
+        initTable : {
             value: function(cameras)
             {
                 $(".header > div > span").html("Activity");
-                $(".content").html("<div class='progress mdl-progress mdl-js-progress mdl-progress__indeterminate'></div><div class='timeline'><ul class='timeline-events'></ul></div>");
+                $(".content").html("<table class='activity' class='display' width='100%'></table>");
                 
-                componentHandler.upgradeAllRegistered();
+                var self = this;
                 
-                var list = [];
-                
-                for(var i = 0; i < cameras.length; ++i)
+                $.fn.dataTable.pipeline = function (opts)
                 {
-                    var type = cameras[i].type == "xt" ? "xt" : "indoor";
-                    list.push("<div data-idx='" + (i + 1) + "' id='timeline_camera" + cameras[i].camera_id + "'><span class='avatar-icon'><img src='img/" + type + ".png' class='rounded'></span>" + cameras[i].name + "</div>");
-                }
-                
-                var options = {
-                    type          : 'point',
-                    rangeAlign	  : 'left',
-                    width           : "60vw",
-                    height          : "auto",
-                    minGridSize     : 100,
-                    scale         : 'day',
-                    rowHeight     : 100,
-                    startDatetime   : "2018-10-01 00:00:00",
-                    endDatetime   : "currently",
-                    loader        : false,
-                    headline      : {
-                        display   : true,
-                        title     : '',
-                        range     : true,
-                        locale    : 'en-US',
-                        format    : { timeZone: 'Europe/Brussels', hour12: false, year: 'numeric', month: 'long', day: 'numeric' }
-                    },
-                    footer        : {
-                        display   : true,
-                        content   : '',
-                        range     : true,
-                        locale    : 'en-US',
-                        format    : { hour12: false, year: 'numeric', month: 'short', day: '2-digit' }
-                    },
-                    sidebar       : {
-                        sticky : true,
-                        list   : list
-                    },
-                    ruler         : {
-                        top    : {
-                            lines      : [ 'year', 'month', 'day', 'hour' ],
-                            height     : 23,
-                            fontSize   : 14,
-                            color      : '#777',
-                            background : '#FFF',
-                            locale     : 'en-US',
-                            format     : { timeZone: 'Europe/Brussels', hour12: false, decade: 'ordinal', lustrum: 'ordinal', year: 'zerofill', month: 'long', weekday: 'long', hour: 'numeric', minute: 'numeric' },
+                    // Configuration options
+                    var conf = $.extend( {
+                        pages: 1,     // number of pages to cache
+                        url: '',      // script url
+                        data: null,   // function or object with parameters to send to the server
+                                      // matching how `ajax.data` works in DataTables
+                        method: 'GET' // Ajax HTTP method
+                    }, opts );
+                 
+                    // Private variables for storing the cache
+                    var cacheLower = -1;
+                    var cacheUpper = null;
+                    var cacheLastRequest = null;
+                    var cacheLastJson = null;
+                 
+                    return function ( request, drawCallback, settings )
+                    {
+                        var ajax          = false;
+                        var requestStart  = request.start;
+                        var drawStart     = request.start;
+                        var requestLength = request.length;
+                        var requestEnd    = requestStart + requestLength;
+                         
+                        if ( settings.clearCache ) {
+                            // API requested that the cache be cleared
+                            ajax = true;
+                            settings.clearCache = false;
                         }
-                    },
-                    eventMeta       : {
-                        display     : false,
-                        scale       : 'hour',
-                    },
-                    zoom          : true
+                        else if ( cacheLower < 0 || requestStart < cacheLower || requestEnd > cacheUpper ) {
+                            // outside cached data - need to make a request
+                            ajax = true;
+                        }
+                        else if ( JSON.stringify( request.order )   !== JSON.stringify( cacheLastRequest.order ) ||
+                                  JSON.stringify( request.columns ) !== JSON.stringify( cacheLastRequest.columns ) ||
+                                  JSON.stringify( request.search )  !== JSON.stringify( cacheLastRequest.search )
+                        ) {
+                            // properties changed (ordering, columns, searching)
+                            ajax = true;
+                        }
+                         
+                        // Store the request for checking next time around
+                        cacheLastRequest = $.extend( true, {}, request );
+                 
+                        if ( ajax ) {
+                            // Need data from the server
+                            if ( requestStart < cacheLower ) {
+                                requestStart = requestStart - (requestLength*(conf.pages-1));
+                 
+                                if ( requestStart < 0 ) {
+                                    requestStart = 0;
+                                }
+                            }
+                             
+                            cacheLower = requestStart;
+                            cacheUpper = requestStart + (requestLength * conf.pages);
+                 
+                            request.start = requestStart;
+                            request.length = requestLength*conf.pages;
+                 
+                            // Provide the same `data` options as DataTables.
+                            if ( typeof conf.data === 'function' ) {
+                                // As a function it is executed with the data object as an arg
+                                // for manipulation. If an object is returned, it is used as the
+                                // data object to submit
+                                var d = conf.data( request );
+                                if ( d ) {
+                                    $.extend( request, d );
+                                }
+                            }
+                            else if ( $.isPlainObject( conf.data ) ) {
+                                // As an object, the data given extends the default
+                                $.extend( request, conf.data );
+                            }
+                            
+                            settings.jqXHR = self.presenter.getVideos((request.start / 10) + 1, function(data, count)
+                            {
+                                var events = [];
+                                
+                                $.each( data, function( key, value )
+                                {
+                                    events.push([
+                                      "",
+                                      value.camera_name,
+                                      moment(value.created_at).fromNow(),
+                                      moment.utc(value.length * 1000).format('HH:mm:ss')
+                                    ]);
+                                });
+                                
+                                var json = {
+                                    "draw": request.draw,
+                                    "recordsTotal": count,
+                                    "recordsFiltered": count,
+                                    "data": events
+                                };
+                                
+                                cacheLastJson = $.extend(true, {}, json);
+                 
+                                if ( cacheLower != drawStart )
+                                {
+                                    json.data.splice( 0, drawStart-cacheLower );
+                                }
+                                if ( requestLength >= -1 )
+                                {
+                                    json.data.splice( requestLength, json.data.length );
+                                }
+                                 
+                                drawCallback(json);
+                            });
+                        }
+                        else
+                        {
+                            json = $.extend( true, {}, cacheLastJson );
+                            json.draw = request.draw; // Update the echo for each response
+                            json.data.splice( 0, requestStart-cacheLower );
+                            json.data.splice( requestLength, json.data.length );
+                 
+                            drawCallback(json);
+                        }
+                    }
                 };
+                 
+                // Register an API method that will empty the pipelined data, forcing an Ajax
+                // fetch on the next draw (i.e. `table.clearPipeline().draw()`)
+                $.fn.dataTable.Api.register( 'clearPipeline()', function () {
+                    return this.iterator( 'table', function ( settings ) {
+                        settings.clearCache = true;
+                    } );
+                } );
                 
-               this.timeline = $('.content .timeline').Timeline(options);
-               this.presenter.getVideos();
-            },
-            enumerable: false
-        },
-        load : {
-            value: function(data)
-            {
-                var events = [];
-                
-                $.each( data, function( key, value )
-                {
-                    events.push({
-                      label: value.camera_name,
-                      content: value.camera_name,
-                      start: moment(value.created_at).format("YYYY-MM-DD hh:mm:ss"),
-                      end: moment(value.created_at).add(value.length, 'seconds').format("YYYY-MM-DD hh:mm:ss"),
-                      row: $("#timeline_camera" + value.camera_id).data("idx"),
-                      size: 80,
-                      y: 25
+                this.cameras = cameras;
+
+                $('.content table.activity').dataTable(
+                    {
+                        columns: [
+                            {title: ""},
+                            {title: "Camera"},
+                            {title: "Time"},
+                            {title: "Duration"}],
+                        processing: true,
+                        serverSide: true,
+                        ordering: false,
+                        searching: false,
+                        bLengthChange: false,
+                        scroller: {
+                            loadingIndicator: true
+                        },
+                        ajax: $.fn.dataTable.pipeline(
+                        {
+                            pages: 1 // number of pages to cache
+                        } )
                     });
-                });
-                
-                this.timeline.Timeline('addEvent', events);
-                
-                $(".content .progress").hide();
             },
             enumerable: false
         },
         showError : {
             value: function(data)
             {
-                console.log(data);
+                console.error(data);
             },
             enumerable: false
         }
