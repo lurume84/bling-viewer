@@ -122,9 +122,14 @@
     box-sizing: border-box;
   }
   
-  .content .timeline
+  .content table.activity .icon
   {
-      overflow-x: auto;
+      width: 50px;
+  }
+  
+  .content table.activity tbody td
+  {
+    padding: 0 !important;
   }
   
   .demo-card-square.mdl-card {
@@ -168,16 +173,4 @@
 {
     font-weight: bold;
     color: #FF0000;
-}
-
-.calendar
-{
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.avatar-icon .rounded
-{
-    width: 80px;
-    height:auto;
 }

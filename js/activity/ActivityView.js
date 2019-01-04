@@ -47,6 +47,8 @@
                 $(".header > div > span").html("Activity");
                 $(".content").html("<table class='activity' class='display' width='100%'></table>");
                 
+                this.cameras = cameras;
+                
                 var self = this;
                 
                 $.fn.dataTable.pipeline = function (opts)
@@ -131,9 +133,21 @@
                                 
                                 $.each( data, function( key, value )
                                 {
+                                    var icon = "";
+                                    
+                                    for(var i = 0; i < self.cameras.length; ++i)
+                                    {
+                                        if(self.cameras[i].name == value.camera_name)
+                                        {
+                                            icon = "<img class='icon' src=\"img/" + self.cameras[i].type + ".png\"/>";
+                                            break;
+                                        }
+                                    }
+                                    var cameraName = icon + value.camera_name;
+                                    
                                     events.push([
-                                      "",
-                                      value.camera_name,
+                                      "<img id='image" + value.id + "'/>",
+                                      cameraName,
                                       moment(value.created_at).fromNow(),
                                       moment.utc(value.length * 1000).format('HH:mm:ss')
                                     ]);
@@ -179,8 +193,6 @@
                         settings.clearCache = true;
                     } );
                 } );
-                
-                this.cameras = cameras;
 
                 $('.content table.activity').dataTable(
                     {
