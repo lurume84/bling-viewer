@@ -129,6 +129,13 @@
   
   .thumbnail
   {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thumbnail .loadingContainer
+  {
     margin: auto;
     width: 50%;
   }
@@ -136,6 +143,50 @@
   .content table.activity tbody td
   {
     padding: 0 !important;
+  }
+  
+  .content table.activity thead th
+  {
+      padding-top: 5px !important;
+  }
+  
+  .content table.activity tbody tr.selected
+  {
+      color: #fff;
+      background-color: #3FA0D6 !important;
+  }
+  
+  .content .tableContainer, .content .videoContainer
+  {
+      float:left;
+      width: 50%;
+  }
+  
+  .content .videoContainer
+  {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .content .videoContainer video
+  {
+      width:100%;
+      margin-left: 16px;
+  }
+  
+  .content .videoThumbnail
+  {
+    background-size: contain;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    width: 80px;
+    height: 45px;
+  }
+  
+  .actions i
+  {
+      cursor:pointer;
   }
   
   .demo-card-square.mdl-card {

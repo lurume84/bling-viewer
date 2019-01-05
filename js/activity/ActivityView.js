@@ -44,7 +44,8 @@
             value: function(cameras)
             {
                 $(".header > div > span").html("Activity");
-                $(".content").html("<table class='activity' class='display' width='100%'></table>");
+                $(".content").html("<div class='tableContainer'><table class='activity' class='display' width='100%'></table></div>"+
+                                    "<div class='videoContainer'></div>");
                 
                 this.cameras = cameras;
                 
@@ -56,14 +57,15 @@
                     } );
                 } );
 
-                $('.content table.activity').dataTable(
+                var table = $('.content table.activity').dataTable(
                 {
                     columns:
                     [
                         {title: "", render: self.renderThumbnail},
                         {title: "Camera"},
                         {title: "Time"},
-                        {title: "Duration"}
+                        {title: "Duration"},
+                        {title: "", render: self.renderActions, width: "20px"}
                     ],
                     processing: true,
                     serverSide: true,
@@ -74,6 +76,39 @@
                 }).on('draw.dt', function ()
                 {
                     componentHandler.upgradeAllRegistered();
+                    
+                    $(".download").click(function()
+                    {
+                        var path = $(this).data("path");
+                        self.presenter.downloadMedia(path, function(data)
+                        {
+                            var a = document.createElement('a');
+                            var url = window.URL.createObjectURL(data);
+                            a.href = url;
+                            a.download = path.replace(/^.*[\\\/]/, '');
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                        });
+                    });
+                    
+                    $('.content table.activity tr:first-child').trigger( 'click');
+                });
+                
+                $('.content table.activity').on( 'click', 'tr', function ()
+                {
+                    table.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    
+                    $(".videoContainer").html("<div class=\"mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active\"></div>");
+                    
+                    componentHandler.upgradeAllRegistered();
+                    
+                    var path = table.$('tr.selected').find(".actions i").data("path");
+                    
+                    self.presenter.getMedia(path, function(content)
+                    {
+                        $(".videoContainer").html("<video controls autoplay><source type='video/mp4' src='data:video/mp4;base64," + content + "'></video>");
+                    });
                 });
             },
             enumerable: false
@@ -81,12 +116,26 @@
         renderThumbnail : {
             value: function(data, type, row, meta)
             {
-                self.presenter.getThumbnail(data, function()
+                self.presenter.getMedia(data, function(content)
                 {
-                    $("#thumbnail" + meta.row).html("pepe");
+                    var container = $("#thumbnail" + meta.row);
+                    
+                    container.html("");
+                    
+                    var thumbnail = $("<div/>", {class: "videoThumbnail"});
+                    thumbnail.css("background-image", "url('data:image/png;base64," + content + "')");
+                    
+                    thumbnail.appendTo(container);
                 });
                 
-                return '<div class="thumbnail" id="thumbnail' + meta.row + '"><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></div>';
+                return '<div class="thumbnail" id="thumbnail' + meta.row + '"><div class="loadingContainer"><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></div></div>';
+            },
+            enumerable: false
+        },
+        renderActions : {
+            value: function(data, type, row, meta)
+            {
+                return '<div class="actions"><i class="download fas fa-download" data-path="' + data + '"></i></div>';
             },
             enumerable: false
         },
@@ -187,10 +236,11 @@
                                 var cameraName = icon + value.camera_name;
                                 
                                 events.push([
-                                  value.thumbnail,
+                                  value.thumbnail + "_s.jpg",
                                   cameraName,
                                   moment(value.created_at).fromNow(),
-                                  moment.utc(value.length * 1000).format('HH:mm:ss')
+                                  moment.utc(value.length * 1000).format('HH:mm:ss'),
+                                  value.address
                                 ]);
                             });
                             

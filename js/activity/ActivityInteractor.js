@@ -53,19 +53,45 @@
             },
             enumerable: false
         },
-        getThumbnail : {
+        getMedia : {
             value: function(path, listener)
             {
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + path + ".jpg",
+					url: "https://rest-" + credentials.region + "." + server + path,
+                    mimeType: "text/plain; charset=x-user-defined",
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
 					success: function (data)
 					{
 						listener.onSuccess(base64Encode(data));
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(error);
+					}
+				});
+            },
+            enumerable: false
+        },
+        downloadMedia : {
+            value: function(path, listener)
+            {
+				$.ajax
+				({
+					type: "GET",
+					url: "https://rest-" + credentials.region + "." + server + path,
+					beforeSend: function(xhr) {                        
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
+					},
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+					success: function (data)
+					{
+						listener.onSuccess(data);
 					},
 					error: function (jqxhr, textStatus, error)
 					{
