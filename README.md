@@ -1,5 +1,5 @@
 # blink-viewer
-Blink Home Security Camera is a great product but currenty lacks of an official web viewer. This project is an attempt to create a web viewer that complements the current Mobile application. In conjuntion with blink-browser project, it works as a Desktop solution for Blink Systems. 
+Blink Home Security Camera is a great product but currenty lacks of an official web viewer. This project is an attempt to create a web viewer that complements the current Mobile application. In conjuntion with [Blink Desktop](https://github.com/lurume84/blink-desktop) project, it works as a Desktop solution for Blink Systems. 
 
 ## Example
 ### Networks
@@ -27,5 +27,5 @@ To avoid this problem you can:
 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe --user-data-dir=<path to viewer>. 
 ```
 
-* Use Blink browser, another project WIP. This browser is a modified CEF that will automatically add Immedia servers to CORS headers. 
+* Use [Blink Desktop](https://github.com/lurume84/blink-desktop), another project WIP. This browser is a modified CEF that will automatically add Immedia servers to CORS headers. 
 Additionally, this browser provides advanced functionality like automatic videos backup.
