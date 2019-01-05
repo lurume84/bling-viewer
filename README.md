@@ -24,9 +24,8 @@ To avoid this problem you can:
 
 * Close all instances of Chrome browser (open taskmanager and kill any resilient Chrome process). Execute 
 ```
-./chrome.exe --user-data-dir=<path to viewer>. 
+C:\Program Files (x86)\Google\Chrome\Application\chrome.exe --user-data-dir=<path to viewer>. 
 ```
-This executable is located at C:\Program Files (x86)\Google\Chrome\Application
 
 * Use Blink browser, another project WIP. This browser is a modified CEF that will automatically add Immedia servers to CORS headers. 
 Additionally, this browser provides advanced functionality like automatic videos backup.
