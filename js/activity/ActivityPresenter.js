@@ -90,6 +90,23 @@
                     }));
             },
             enumerable: false
+        },
+        getThumbnail : {
+            value: function(path, callback)
+            {
+                var self = this;
+                    
+                this.interactor.getThumbnail(path, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        callback(data);
+                    },
+                    function(data)
+                    {
+                        self.activityView.showError(data);
+                    }));
+            },
+            enumerable: false
         }
     });
 

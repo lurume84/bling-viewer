@@ -127,6 +127,12 @@
       width: 50px;
   }
   
+  .thumbnail
+  {
+    margin: auto;
+    width: 50%;
+  }
+  
   .content table.activity tbody td
   {
     padding: 0 !important;
