@@ -33,7 +33,6 @@
         load : {
             value: function(data)
             {
-                console.log(data);
                 $("#login .progress").hide();
                 $(".avatar-dropdown > span").html($("#login .user").val());
                 $("#login")[0].close();
@@ -45,7 +44,8 @@
             {
                 $("#login .progress").hide();
                 $("#login .submit").show();
-                console.log(data);
+                
+                document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: data.message});
             },
             enumerable: false
         }

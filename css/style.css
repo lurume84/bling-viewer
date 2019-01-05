@@ -231,3 +231,16 @@
     font-weight: bold;
     color: #FF0000;
 }
+
+#toast i
+{
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    padding: 15px;
+}
+
+#toast div
+{
+    margin-left: 30px;
+}
