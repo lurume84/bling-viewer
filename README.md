@@ -1,6 +1,16 @@
 # blink-viewer
 Blink Home Security Camera is a great product but currenty lacks of an official web viewer. This project is an attempt to create a web viewer that complements the current Mobile application. In conjuntion with blink-browser project, it works as a Desktop solution for Blink Systems. 
 
+## Example
+### Networks
+Check current thumbnail, battery status and temperature for all cameras of each network
+
+![](img/example1.png)
+### Activity
+View and download all videos
+
+![](img/example2.png)
+
 ## Security
 This viewer is just a frontend application. This means user credentials are never stored, being directly forwarded to Immedia servers. 
 Once login succeeds, server returns a token that will be provided in future REST API calls. 
