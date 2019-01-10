@@ -15,6 +15,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + "/networks/",
 					dataType: 'json',
+                    crossDomain: true,
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
@@ -38,6 +39,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + "/network/" + networkId + "/cameras",
 					dataType: 'json',
+                    crossDomain: true,
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},

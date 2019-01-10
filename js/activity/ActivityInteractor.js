@@ -15,6 +15,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + "/api/v2/videos/page/" + page,
 					dataType: 'json',
+                    crossDomain: true,
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
@@ -38,6 +39,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + "/api/v2/videos/count",
 					dataType: 'json',
+                    crossDomain: true,
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
@@ -61,6 +63,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + path,
                     mimeType: "text/plain; charset=x-user-defined",
+                    crossDomain: true,
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
@@ -83,6 +86,7 @@
 				({
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + path,
+                    crossDomain: true,
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},

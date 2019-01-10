@@ -16,6 +16,7 @@
 					url: "https://prod." + server + "/login",
 					data: {"email": user, "password": password},
 					dataType: 'json',
+                    crossDomain: true,
 					beforeSend: function(xhr) { 
 						
 					},

@@ -15,6 +15,7 @@
 					type: "GET",
 					url: "https://rest-" + credentials.region + "." + server + path + ".jpg",
                     mimeType: "text/plain; charset=x-user-defined",
+                    crossDomain: true,
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
 					},
