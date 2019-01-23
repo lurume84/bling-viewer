@@ -13,7 +13,7 @@
 				return $.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v2/videos/page/" + page,
+					url: "https://rest-" + credentials.region + "." + server + "/api/v2/videos/changed?since=-999999999-01-01T00:00:00+18:00&page=" + page,
 					dataType: 'json',
                     crossDomain: true,
 					beforeSend: function(xhr) { 
