@@ -26,6 +26,8 @@
                     });
                     
                     componentHandler.upgradeAllRegistered();
+                    
+                    self.presenter.checkToken();
                 });
             },
             enumerable: false

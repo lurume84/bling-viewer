@@ -16,10 +16,29 @@
 					url: "https://prod." + server + "/login",
 					data: {"email": user, "password": password},
 					dataType: 'json',
-                    crossDomain: true,
 					beforeSend: function(xhr) { 
 						
 					},
+					success: function (json)
+					{
+						listener.onSuccess(json);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(jqxhr.responseJSON);
+					}
+				});
+            },
+            enumerable: false
+        },
+        getToken : {
+            value: function(listener)
+            {
+				$.ajax
+				({
+					type: "GET",
+					url: "token.json",
+					dataType: 'json',
 					success: function (json)
 					{
 						listener.onSuccess(json);

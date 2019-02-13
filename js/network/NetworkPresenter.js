@@ -14,6 +14,23 @@
 
     Object.defineProperties(NetworkPresenter.prototype,
     {
+        getNetworks : {
+            value: function()
+            {
+                var self = this;
+                    
+                this.interactor.getNetworks(new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        self.networkView.onNetworks(data);
+                    },
+                    function(data)
+                    {
+                        self.networkView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
         getNetwork : {
             value: function(networkId)
             {

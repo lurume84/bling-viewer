@@ -221,7 +221,7 @@
                         {
                             var events = [];
                             
-                            $.each( data, function( key, value )
+                            $.each( data.videos, function( key, value )
                             {
                                 var icon = "";
                                 

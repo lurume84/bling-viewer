@@ -38,6 +38,32 @@
                     }));
             },
             enumerable: false
+        },
+        checkToken : {
+            value: function()
+            {
+                var self = this;
+                    
+                this.interactor.getToken(new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        $.each( data.region, function( key, value )
+                        {
+                            credentials.region = key;
+                        });
+                        
+                        credentials.token = data.authtoken.authtoken;
+
+                        self.loginView.load(data);
+                        self.activityView.onLogin(data);
+                        self.networkView.onLogin(data);
+                    },
+                    function(data)
+                    {
+                        
+                    }));
+            },
+            enumerable: false
         }
     });
 

@@ -62,10 +62,7 @@
                 return this.interactor.getVideos(page, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        self.getVideosCount(function(count)
-                        {
-                            callback(data, count.count);
-                        });
+                        callback(data, 500);
                     },
                     function(data)
                     {

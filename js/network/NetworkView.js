@@ -19,13 +19,20 @@
         onLogin : {
             value: function(data)
             {
+                this.presenter.getNetworks();
+            },
+            enumerable: false
+        },
+        onNetworks : {
+            value: function(data)
+            {
                 var self = this;
                 
                 $(".drawer .navigation").append("<div class='separator'>Networks</div>");
                 //$(".drawer .navigation").append("<div class='mdl-layout-spacer'></div>");
                 $.each( data.networks, function( key, value )
                 {
-                    var network = $("<a/>", {class: "mdl-navigation__link", href: "#", "data-name": value.name, "data-id": key, html: "<i class='fas fa-network-wired'></i>" + value.name});
+                    var network = $("<a/>", {class: "mdl-navigation__link", href: "#", "data-name": value.name, "data-id": value.id, html: "<i class='fas fa-network-wired'></i>" + value.name});
                     
                     network.click(function(evt)
                     {
