@@ -220,10 +220,21 @@
     width:100%;
 }
 
-#login .mdl-dialog__title span
+#login .mdl-dialog__title img
+{
+    width:100px;
+    margin-left:50px;
+}
+
+.blink_label
 {
     color: #3FA0D6;
-    border-top: 3px solid #3FA0D6;
+    border-top: 2px solid #3FA0D6;
+}
+
+.mdl-radio
+{
+    margin-top:20px;
 }
 
 .error
