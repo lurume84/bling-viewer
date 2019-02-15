@@ -57,7 +57,11 @@
         showError : {
             value: function(data)
             {
-                console.log(data);
+                if(data.status == "401")
+                {
+                    $("#login")[0].showModal();
+                    $(".drawer .navigation").html("");
+                }
             },
             enumerable: false
         }
