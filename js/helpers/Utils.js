@@ -4,6 +4,11 @@ function round(value, numDec)
     return Math.round(value * dec) / dec;
 }
 
+function setAppVersion(version)
+{
+    
+}
+
 function base64Encode(str)
 {
     var CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
