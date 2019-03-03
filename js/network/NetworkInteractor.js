@@ -36,7 +36,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/network/" + networkId + "/cameras",
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + networkId,
 					dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
