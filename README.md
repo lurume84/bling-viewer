@@ -20,7 +20,7 @@ As Immedia server is not being proxied by any other server, trying to run the ap
 Using CORS plugin will not solve the problem as some Immedia endpoints do not implement OPTIONS method for some calls. Chrome's preflight request 
 will fail for this reason. 
 
-To avoid this problem you can:
+To avoid this problem you can do one of these things:
 
 * Close all instances of Chrome browser (open taskmanager and kill any resilient Chrome process). Execute 
 ```
