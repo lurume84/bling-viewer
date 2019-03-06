@@ -26,7 +26,7 @@
                         
                         $.each( data.networks, function( key, value )
                         {
-                            self.networkInteractor.getNetwork(value.id, new blink.listeners.BaseDecisionListener(
+                            self.networkInteractor.getNetwork(value.network_id, new blink.listeners.BaseDecisionListener(
                             function(data)
                             {
                                 i++;
