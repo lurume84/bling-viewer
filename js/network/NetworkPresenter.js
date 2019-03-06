@@ -23,6 +23,10 @@
                     function(data)
                     {
                         self.networkView.onNetworks(data);
+                        $.each( data.networks, function( key, value )
+                        {
+                            self.ctx.getCameraPresenter().cameraView.onNetwork(value);
+                        });
                     },
                     function(data)
                     {
@@ -40,11 +44,6 @@
                     function(data)
                     {
                         self.networkView.onNetwork(data);
-                        
-                        $.each( data.devicestatus, function( key, value )
-                        {
-                            self.ctx.getCameraPresenter().cameraView.load(value);
-                        });
                     },
                     function(data)
                     {

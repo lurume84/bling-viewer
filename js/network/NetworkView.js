@@ -29,19 +29,14 @@
                 var self = this;
                 
                 $(".drawer .navigation").append("<div class='separator'>Networks</div>");
-                //$(".drawer .navigation").append("<div class='mdl-layout-spacer'></div>");
                 $.each( data.networks, function( key, value )
                 {
-                    var network = $("<a/>", {class: "mdl-navigation__link", href: "#", "data-name": value.name, "data-id": value.id, html: "<i class='fas fa-network-wired'></i>" + value.name});
-                    
-                    network.click(function(evt)
-                    {
-                        $(".header > div > span").html($(this).data("name"));
-                        
-                        self.presenter.getNetwork($(this).data("id"));
-                        evt.preventDefault();
-                    });
-                    
+                    var network = $("<a/>", {class: "mdl-navigation__link", 
+                                            id: "network" + value.network_id,
+                                            href: "#", "data-name": value.name, 
+                                            "data-id": value.network_id, 
+                                            html: "<i class='fas fa-network-wired'></i>" + value.name});
+                                            
                     network.appendTo($(".drawer .navigation"));
                 });
             },
