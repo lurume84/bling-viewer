@@ -52,6 +52,52 @@
 				});
             },
             enumerable: false
+        },
+        requestThumbnail : {
+            value: function(network, camera, listener)
+            {
+				$.ajax
+				({
+					type: "POST",
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + network + "/camera/" + camera + "/thumbnail",
+                    dataType: 'json',
+					beforeSend: function(xhr) {                        
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
+					},
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(error);
+					}
+				});
+            },
+            enumerable: false
+        },
+        checkCommand : {
+            value: function(network, command, listener)
+            {
+				$.ajax
+				({
+					type: "GET",
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + network + "/command/" + command,
+                    dataType: 'json',
+					beforeSend: function(xhr) {                        
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
+					},
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(error);
+					}
+				});
+            },
+            enumerable: false
         }
     });
 

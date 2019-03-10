@@ -255,3 +255,14 @@
 {
     margin-left: 30px;
 }
+
+.action
+{
+    margin-top:6px;
+    font-size:25px;
+}
+
+.loadingThumb
+{
+    color:white !important;
+}
