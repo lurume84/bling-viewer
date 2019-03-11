@@ -223,25 +223,28 @@
                             
                             $.each( data.videos, function( key, value )
                             {
-                                var icon = "";
-                                
-                                for(var i = 0; i < self.cameras.length; ++i)
+                                if(!value.deleted)
                                 {
-                                    if(self.cameras[i].name == value.camera_name)
+                                    var icon = "";
+                                    
+                                    for(var i = 0; i < self.cameras.length; ++i)
                                     {
-                                        icon = "<img class='icon' src=\"img/" + self.cameras[i].type + ".png\"/>";
-                                        break;
+                                        if(self.cameras[i].name == value.camera_name)
+                                        {
+                                            icon = "<img class='icon' src=\"img/" + self.cameras[i].type + ".png\"/>";
+                                            break;
+                                        }
                                     }
+                                    var cameraName = icon + value.camera_name;
+                                    
+                                    events.push([
+                                      value.thumbnail + "_s.jpg",
+                                      cameraName,
+                                      moment(value.created_at).fromNow(),
+                                      moment.utc(value.length * 1000).format('HH:mm:ss'),
+                                      value.address
+                                    ]);
                                 }
-                                var cameraName = icon + value.camera_name;
-                                
-                                events.push([
-                                  value.thumbnail + "_s.jpg",
-                                  cameraName,
-                                  moment(value.created_at).fromNow(),
-                                  moment.utc(value.length * 1000).format('HH:mm:ss'),
-                                  value.address
-                                ]);
                             });
                             
                             var json = {
