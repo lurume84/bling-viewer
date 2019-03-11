@@ -194,10 +194,18 @@
   height: 283px;
   margin-right: 10px;
 }
+
 .demo-card-square > .mdl-card__title {
   color: #fff;
-  background-color: #3FA0D6;
+  background-color: #fff;
   background-size: contain;
+}
+
+.demo-card-square > .mdl-card__title .mdl-spinner 
+{
+  position:absolute;
+  left: calc(160px - 22px);
+  display:none;
 }
 
 .demo-card-square.mdl-card .description
