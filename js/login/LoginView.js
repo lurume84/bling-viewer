@@ -36,7 +36,15 @@
             value: function(data)
             {
                 $("#login .progress").hide();
-                $(".avatar-dropdown > span").html($("#login .user").val());
+                
+                var userName = $("#login .user").val();
+                
+                if(userName == "")
+                {
+                    userName = "Recovered session";
+                }
+                
+                $(".avatar-dropdown > span").html(userName);
                 $("#login")[0].close();
             },
             enumerable: false
