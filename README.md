@@ -27,5 +27,5 @@ To avoid this problem you can do one of these things:
 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe --user-data-dir=<path to viewer>. 
 ```
 
-* Use [Bling Desktop](https://github.com/lurume84/bling-desktop), another project WIP. This browser is a modified CEF that will automatically add Immedia servers to CORS headers. 
+* Or, use [Bling Desktop](https://github.com/lurume84/bling-desktop), another project WIP. This browser is a modified CEF that will automatically add Immedia servers to CORS headers. 
 Additionally, this browser provides advanced functionality like automatic videos backup.
