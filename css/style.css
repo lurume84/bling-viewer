@@ -117,9 +117,9 @@
   }
   
   .content {
-    max-width: 1080px;
     font-family: 'Roboto', 'Helvetica', sans-serif;
     box-sizing: border-box;
+    padding:0px !important;
   }
   
   .content table.activity .icon
@@ -140,7 +140,7 @@
     width: 50%;
   }
   
-  .content table.activity tbody td
+  .content table.activity td
   {
     padding: 0 !important;
   }
@@ -150,7 +150,7 @@
       padding-top: 5px !important;
   }
   
-  .content table.activity tbody tr.selected
+  .content table.activity tr.selected
   {
       color: #fff;
       background-color: #3FA0D6 !important;
@@ -159,20 +159,30 @@
   .content .tableContainer, .content .videoContainer
   {
       float:left;
-      width: 50%;
+  }
+  
+  .content .tableContainer
+  {
+      width: 20%;
+      height:88vh;
+      overflow-y:auto;
+      overflow-x:hidden;
+  }
+  
+  table
+  {
+    border:none;
+    border-collapse:collapse;
   }
   
   .content .videoContainer
   {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 80%;
   }
   
   .content .videoContainer video
   {
       width:100%;
-      margin-left: 16px;
   }
   
   .content .videoThumbnail
