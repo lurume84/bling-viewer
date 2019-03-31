@@ -175,6 +175,17 @@
     border-collapse:collapse;
   }
   
+  table tr
+  {
+    cursor:pointer;
+  }
+  
+  table tr.separator
+  {
+    height:1px;
+    background-color:#c0c0c0;
+  }
+  
   .content .videoContainer
   {
       width: 80%;
