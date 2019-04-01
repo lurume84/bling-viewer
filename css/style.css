@@ -160,6 +160,11 @@
   {
       float:left;
   }
+
+    .content .tableContainer, .content .videoContainer .mdl-progress
+  {
+      width:100%;
+  }
   
   .content .tableContainer
   {
@@ -215,6 +220,8 @@
   height: 283px;
   margin-right: 10px;
 }
+
+
 
 .demo-card-square > .mdl-card__title {
   color: #fff;

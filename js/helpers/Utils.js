@@ -25,7 +25,8 @@ function round(value, numDec)
 
 function setAppVersion(version)
 {
-    
+    var li = $("<li/>", {class: "mdl-menu__item", onclick: "window.open('https://github.com/lurume84/bling-desktop', '_blank')", html: "<i class=\"fas fa-desktop\"></i>&nbsp;Desktop " + version})
+    li.appendTo($("#moremenu"));
 }
 
 function base64Encode(str)

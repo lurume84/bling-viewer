@@ -41,7 +41,7 @@
                 
                 self.updateContent(card, data);
                 
-                card.appendTo($(".content"));
+                card.appendTo($(".content .cameraContainer"));
                 
                 componentHandler.upgradeDom();
             },
@@ -86,7 +86,7 @@
                 $("#network" + data.network_id).click(function(evt)
                 {
                     $(".header > div > span").html($(this).data("name"));
-                    $(".content").html("");
+                    $(".content").html("<div class='cameraContainer mdl-grid'></a>");
                     
                     $.each( data.cameras, function( key, value2 )
                     {

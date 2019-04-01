@@ -5,9 +5,7 @@
         <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/fonts.css">
-        <link rel="stylesheet" type="text/css" href="lib/jquery/datatables/datatables.min.css"/>
         <script src="lib/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="lib/jquery/datatables/datatables.min.js"></script>
         <script src="lib/mdl/material.min.js"></script>
         <script src="lib/moment.min.js"></script>
         <script src="js/Context.js"></script>
@@ -45,10 +43,8 @@
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
               <i class="material-icons">more_vert</i>
             </button>
-            <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-              <li class="mdl-menu__item">About</li>
-              <li class="mdl-menu__item">Contact</li>
-              <li class="mdl-menu__item">Legal information</li>
+            <ul id="moremenu" class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+              <li class="mdl-menu__item" onclick="window.open('https://github.com/lurume84/bling-viewer', '_blank')"><i class="fas fa-eye"></i>&nbsp;Viewer 0.1.6.0</li>
             </ul>
           </div>
         </header>
@@ -70,7 +66,7 @@
           </nav>
         </div>
         <main class="mdl-layout__content mdl-color--grey-100">
-          <div class="mdl-grid content"></div>
+          <div class="content"></div>
         </main>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">

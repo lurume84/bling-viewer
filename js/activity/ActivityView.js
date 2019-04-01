@@ -53,7 +53,7 @@
                 
                 self.loadVideos(i, function()
                 {
-                    $('.content table.activity tr:first-child').trigger( 'click');
+                    $('table.activity tr:nth-child(2)').trigger( 'click');
                 });
                 
                 $(".tableContainer").scroll(function()
@@ -67,7 +67,6 @@
             },
             enumerable: false
         },
-        
         loadVideos : {
             value: function(page, loaded)
             {
@@ -147,7 +146,7 @@
                                     table.find('tr.selected').removeClass('selected');
                                     $(this).addClass('selected');
                                     
-                                    $(".videoContainer").html("<div class=\"mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active\"></div>");
+                                    $(".videoContainer").html("<div class=\"mdl-progress mdl-js-progress mdl-progress__indeterminate\"></div>");
                                     
                                     componentHandler.upgradeAllRegistered();
                                     
