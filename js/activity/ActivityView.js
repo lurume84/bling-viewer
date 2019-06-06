@@ -74,13 +74,13 @@
                 {
                     var events = [];
                     
-                    if(data.videos != undefined)
+                    if(data.media != undefined)
                     {
                         var table = $("table.activity");
                         
                         $("<tr/>", {html: "<td></td><td></td><td></td>", class: "separator"}).appendTo(table);
                         
-                        $.each( data.videos, function( key, value )
+                        $.each( data.media, function( key, value )
                         {
                             if(!value.deleted)
                             {
@@ -103,7 +103,7 @@
                                 var cameraName = $("<td/>", {html: icon + value.camera_name});
                                 var time = $("<td/>", {html: moment(value.created_at).fromNow()});
                                 var duration = $("<td/>", {html: moment.utc(value.length * 1000).format('HH:mm:ss')});
-                                var video = $("<td/>", {html: '<div class="actions"><i class="download fas fa-download" data-path="' + value.address + '"></i></div>'});
+                                var video = $("<td/>", {html: '<div class="actions"><i class="download fas fa-download" data-path="' + value.media + '"></i></div>'});
                                 
                                 thumbnail.appendTo(tr);
                                 //cameraName.appendTo(tr);
