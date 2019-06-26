@@ -29,11 +29,17 @@
                 var title = $("<div/>", {class: "mdl-card__title mdl-card--expand", html: loading + "<h2 class='mdl-card__title-text'>" + data.name + serial + "</h2>"});
                 var text = $("<div/>", {class: "mdl-card__supporting-text", html: "<div class='description'></div><div class='icons'></div>"});
                 var actions = $("<div/>", {class: "mdl-card__actions mdl-card--border", 
-                                            html: "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
+                                            html: "<a class='thumbnail-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
                                                     "<i class='action fas fa-camera' title='Get thumbnail'></i>" + 
-                                                    "</a>",
-                                            click: function(){self.requestThumbnail(data);}
+                                                    "</a>" +
+                                                    "<a class='live-view-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
+                                                    "<i class='action fas fa-eye' title='Live view'></i>" + 
+                                                    "</a>"                                                    
                                             });
+                                            
+                actions.find(".thumbnail-button").click(function(){self.requestThumbnail(data);});
+                actions.find(".live-view-button").click(function(){self.requestLiveView(data);});
+                
                 
                 title.appendTo(card);
                 text.appendTo(card);
@@ -42,6 +48,7 @@
                 self.updateContent(card, data);
                 
                 card.appendTo($(".content .cameraContainer"));
+                
                 
                 componentHandler.upgradeDom();
             },
@@ -155,6 +162,57 @@
                         self.presenter.checkCommand(data.commands[0].network_id, data.commands[0].id, self.onThumbnailCommand);
                     }, 2000);
                 }
+            },
+            enumerable: false
+        },
+        requestLiveView : {
+            value: function(data)
+            {
+                self.presenter.requestLiveView(data.network_id, data.camera_id);
+            },
+            enumerable: false
+        },
+        onRequestLiveView : {
+            value: function(data)
+            {
+                console.log(data.server);
+                
+                setTimeout(function()
+                {
+                    self.presenter.checkCommand(data.network_id, data.id, self.onLiveViewCommand);
+                }, 2000);
+            },
+            enumerable: false
+        },
+        onLiveViewCommand : {
+            value: function(data)
+            {
+                var url = data.commands[0].server
+                
+                //console.log(url)
+                
+                //self.presenter.joinCommand(data.commands[0].network_id, data.commands[0].camera_id, data.commands[0].id, self.onJoinCommand);
+                
+                //$(".content .cameraContainer").append("<video src='" + url + "' autoplay style=\"width:400px;height:300px\"></video>");
+                
+                if(data.complete)
+                {
+                    
+                }
+                else
+                {
+                    setTimeout(function()
+                    {
+                        self.presenter.checkCommand(data.commands[0].network_id, data.commands[0].id, self.onLiveViewCommand);
+                    }, 2000);
+                }
+            },
+            enumerable: false
+        },
+        onJoinCommand : {
+            value: function(data)
+            {
+                console.log(data)
             },
             enumerable: false
         },

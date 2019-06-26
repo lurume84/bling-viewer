@@ -62,12 +62,63 @@
             },
             enumerable: false
         },
+        requestLiveView : {
+            value: function(network, camera)
+            {
+                var self = this;
+                    
+                this.interactor.requestLiveView(network, camera, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        self.cameraView.onRequestLiveView(data);
+                    },
+                    function(data)
+                    {
+                        self.cameraView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
         checkCommand : {
             value: function(network, command, onSuccess)
             {
                 var self = this;
                     
                 this.interactor.checkCommand(network, command, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        onSuccess(data);
+                    },
+                    function(data)
+                    {
+                        self.cameraView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
+        joinCommand : {
+            value: function(network, camera, command, onSuccess)
+            {
+                var self = this;
+                    
+                this.interactor.joinCommand(network, camera, command, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        onSuccess(data);
+                    },
+                    function(data)
+                    {
+                        self.cameraView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
+        updateCommand : {
+            value: function(network, command, onSuccess)
+            {
+                var self = this;
+                    
+                this.interactor.updateCommand(network, command, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
                         onSuccess(data);
