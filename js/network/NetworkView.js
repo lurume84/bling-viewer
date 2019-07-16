@@ -57,6 +57,10 @@
                     $("#login")[0].showModal();
                     $(".drawer .navigation").html("");
                 }
+                else
+                {
+                    document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: data.message});
+                }
             },
             enumerable: false
         }

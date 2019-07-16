@@ -24,7 +24,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -47,7 +47,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -70,7 +70,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -93,7 +93,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -116,7 +116,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -139,7 +139,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -162,7 +162,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
@@ -184,7 +184,7 @@
 					},
 					error: function (jqxhr, textStatus, error)
 					{
-						listener.onError(error);
+						listener.onError(jqxhr.responseJSON);
 					}
 				});
             },
