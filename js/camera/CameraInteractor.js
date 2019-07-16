@@ -167,6 +167,28 @@
 				});
             },
             enumerable: false
+        },
+        requestJoin : {
+            value: function(camera, url, listener)
+            {
+				$.ajax
+				({
+					type: "POST",
+					url: "http://127.0.0.1:9191/live",
+                    data: JSON.stringify({camera_id: camera, url: url}),
+                    dataType: 'json',
+                    contentType: 'application/json',
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(error);
+					}
+				});
+            },
+            enumerable: false
         }
     });
 

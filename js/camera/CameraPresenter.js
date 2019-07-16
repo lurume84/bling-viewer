@@ -70,7 +70,7 @@
                 this.interactor.requestLiveView(network, camera, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        self.cameraView.onRequestLiveView(data);
+                        self.cameraView.onRequestLiveView(data, camera);
                     },
                     function(data)
                     {
@@ -119,6 +119,23 @@
                 var self = this;
                     
                 this.interactor.updateCommand(network, command, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        onSuccess(data);
+                    },
+                    function(data)
+                    {
+                        self.cameraView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
+        requestJoin : {
+            value: function(camera, url, onSuccess)
+            {
+                var self = this;
+                    
+                this.interactor.requestJoin(camera, url, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
                         onSuccess(data);

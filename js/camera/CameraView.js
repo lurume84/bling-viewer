@@ -34,21 +34,20 @@
                                                     "</a>" +
                                                     "<a class='live-view-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
                                                     "<i class='action fas fa-eye' title='Live view'></i>" + 
-                                                    "</a>"                                                    
+                                                    "</a><video controls></video>"                                                    
                                             });
                                             
                 actions.find(".thumbnail-button").click(function(){self.requestThumbnail(data);});
                 actions.find(".live-view-button").click(function(){self.requestLiveView(data);});
-                
                 
                 title.appendTo(card);
                 text.appendTo(card);
                 actions.appendTo(card);
                 
                 self.updateContent(card, data);
+                self.getThumbnail(card, data);
                 
                 card.appendTo($(".content .cameraContainer"));
-                
                 
                 componentHandler.upgradeDom();
             },
@@ -82,8 +81,6 @@
                 card.find(".description").html(description);
                 card.find(".icons").html(icons);
                 card.find(".mdl-button").attr("disabled", false);
-                
-                self.getThumbnail(card, data);
             },
             enumerable: false
         },
@@ -153,6 +150,7 @@
                     self.presenter.getCamera(data.commands[0].network_id, data.commands[0].camera_id, "", function(data)
                     {
                         self.updateContent($("#card" + data.camera_id), data);
+                        self.getThumbnail($("#card" + data.camera_id), data);
                     });
                 }
                 else
@@ -168,51 +166,154 @@
         requestLiveView : {
             value: function(data)
             {
-                self.presenter.requestLiveView(data.network_id, data.camera_id);
+                var card = $("#card" + data.camera_id);
+                
+                if(!card.find(".mdl-button").prop('disabled'))
+                {
+                    var image = card.find(".mdl-card__title");
+                    image.css("background-image", "none");
+                    
+                    card.find(".description").html("");
+                    card.find(".icons").html("");
+                    card.find(".mdl-button").attr("disabled", true);
+
+                    // if(Hls.isSupported())
+                    // {
+                        // var card = $("#card" + data.camera_id);
+                        
+                        // var video = card.find("video");
+                        
+                        // video.show();
+                        
+                        // var hls = new Hls();
+                        // hls.loadSource("http://127.0.0.1:9191/live/2019/July/16/LiveView_2019-07-16T09_44_37+00_00/out.m3u8");
+                        // hls.attachMedia(video[0]);
+                        // hls.on(Hls.Events.MANIFEST_PARSED,function()
+                        // {
+                          // video[0].play();
+                        // });
+                    // }
+                    
+                    self.presenter.requestLiveView(data.network_id, data.camera_id);
+                }
             },
             enumerable: false
         },
         onRequestLiveView : {
-            value: function(data)
+            value: function(data, camera_id)
             {
-                console.log(data.server);
-                
-                setTimeout(function()
-                {
-                    self.presenter.checkCommand(data.network_id, data.id, self.onLiveViewCommand);
-                }, 2000);
+                self.presenter.requestJoin(camera_id, data.server, self.onJoin);
             },
             enumerable: false
         },
-        onLiveViewCommand : {
+        onJoin : {
             value: function(data)
             {
-                var url = data.commands[0].server
-                
-                //console.log(url)
-                
-                //self.presenter.joinCommand(data.commands[0].network_id, data.commands[0].camera_id, data.commands[0].id, self.onJoinCommand);
-                
-                //$(".content .cameraContainer").append("<video src='" + url + "' autoplay style=\"width:400px;height:300px\"></video>");
-                
-                if(data.complete)
+                if(Hls.isSupported())
                 {
+                    var card = $("#card" + data.camera_id);
                     
-                }
-                else
-                {
-                    setTimeout(function()
+                    var video = card.find("video");
+                    
+                    video.show();
+                    
+                    var hlsConfig = {
+                        manifestLoadingTimeOut: 100000
+                    };
+                    
+                    var hls = new Hls(hlsConfig);
+                    hls.loadSource(data.url);
+                    hls.attachMedia(video[0]);
+                    hls.on(Hls.Events.MANIFEST_PARSED,function()
                     {
-                        self.presenter.checkCommand(data.commands[0].network_id, data.commands[0].id, self.onLiveViewCommand);
-                    }, 2000);
+                      video[0].play();
+                    });
+                    hls.on(Hls.Events.ERROR, function (event, data) {
+                    console.warn('Error event:', data);
+                    
+                    switch (data.details) {
+                        case Hls.ErrorDetails.MANIFEST_LOAD_ERROR:
+                            console.warn("Cannot load " + url + '. Code ' + data.response.code + ' . Text: ' + data.response.text);
+                            break;
+                        case Hls.ErrorDetails.MANIFEST_LOAD_TIMEOUT:
+                            console.warn('Timeout while loading manifest');
+                            break;
+                        case Hls.ErrorDetails.MANIFEST_PARSING_ERROR:
+                            console.warn('Error while parsing manifest:' + data.reason);
+                            break;
+                        case Hls.ErrorDetails.LEVEL_LOAD_ERROR:
+                            console.warn('Error while loading level playlist');
+                            break;
+                        case Hls.ErrorDetails.LEVEL_LOAD_TIMEOUT:
+                            console.warn('Timeout while loading level playlist');
+                            break;
+                        case Hls.ErrorDetails.LEVEL_SWITCH_ERROR:
+                            console.warn('Error while trying to switch to level ' + data.level);
+                            break;
+                        case Hls.ErrorDetails.FRAG_LOAD_ERROR:
+                            console.warn('Error while loading fragment ' + data.frag.url);
+                            break;
+                        case Hls.ErrorDetails.FRAG_LOAD_TIMEOUT:
+                            console.warn('Timeout while loading fragment ' + data.frag.url);
+                            break;
+                        case Hls.ErrorDetails.FRAG_LOOP_LOADING_ERROR:
+                            console.warn('Fragment-loop loading error');
+                            break;
+                        case Hls.ErrorDetails.FRAG_DECRYPT_ERROR:
+                            console.warn('Decrypting error:' + data.reason);
+                            break;
+                        case Hls.ErrorDetails.FRAG_PARSING_ERROR:
+                            console.warn('Parsing error:' + data.reason);
+                            break;
+                        case Hls.ErrorDetails.KEY_LOAD_ERROR:
+                            console.warn('Error while loading key ' + data.frag.decryptdata.uri);
+                            break;
+                        case Hls.ErrorDetails.KEY_LOAD_TIMEOUT:
+                            console.warn('Timeout while loading key ' + data.frag.decryptdata.uri);
+                            break;
+                        case Hls.ErrorDetails.BUFFER_APPEND_ERROR:
+                            console.warn('Buffer append error');
+                            break;
+                        case Hls.ErrorDetails.BUFFER_ADD_CODEC_ERROR:
+                            console.warn('Buffer add codec error for ' + data.mimeType + ':' + data.err.message);
+                            break;
+                        case Hls.ErrorDetails.BUFFER_APPENDING_ERROR:
+                            console.warn('Buffer appending error');
+                            break;
+                        case Hls.ErrorDetails.BUFFER_STALLED_ERROR:
+                            console.warn('Buffer stalled error');
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    if (data.fatal)
+                    {
+                        console.error('Fatal error :' + data.details);
+                        switch (data.type) {
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                
+                                break;
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                console.error('A network error occured');
+                                break;
+                            default:
+                                console.error('An unrecoverable error occured');
+                                hls.destroy();
+                                break;
+                        }
+                    }
+                });
+                hls.on(Hls.Events.BUFFER_CREATED, function (event, data) {
+                    
+                });
+                hls.on(Hls.Events.BUFFER_APPENDING, function (event, data) {
+                    
+                });
+                hls.on(Hls.Events.FPS_DROP, function (event, data) {
+                    
+                });
                 }
-            },
-            enumerable: false
-        },
-        onJoinCommand : {
-            value: function(data)
-            {
-                console.log(data)
             },
             enumerable: false
         },
