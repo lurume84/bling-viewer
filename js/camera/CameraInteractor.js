@@ -189,7 +189,29 @@
 				});
             },
             enumerable: false
-        }
+        },
+        requestUnjoin : {
+            value: function( camera, listener)
+            {
+				$.ajax
+				({
+					type: "DELETE",
+					url: "http://127.0.0.1:9191/live",
+                    data: JSON.stringify({camera_id: camera}),
+                    dataType: 'json',
+                    contentType: 'application/json',
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(error);
+					}
+				});
+            },
+            enumerable: false
+        },
     });
 
     interactors.CameraInteractor = CameraInteractor;

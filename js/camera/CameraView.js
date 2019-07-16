@@ -38,7 +38,7 @@
                                             });
                                             
                 actions.find(".thumbnail-button").click(function(){self.requestThumbnail(data);});
-                actions.find(".live-view-button").click(function(){self.requestLiveView(data);});
+                actions.find(".live-view-button").click(function(){self.clickLiveView(data);});
                 
                 title.appendTo(card);
                 text.appendTo(card);
@@ -163,16 +163,24 @@
             },
             enumerable: false
         },
-        requestLiveView : {
+        clickLiveView : {
             value: function(data)
             {
                 var card = $("#card" + data.camera_id);
                 
-                if(!card.find(".mdl-button").prop('disabled'))
+                var button = card.find(".live-view-button");
+                
+                if(!button.prop('disabled'))
                 {
-                    card.find(".mdl-button").attr("disabled", true);
-
-                    self.presenter.requestLiveView(data.network_id, data.camera_id);
+                    if(!button.hasClass("live"))
+                    {
+                        self.presenter.requestLiveView(data.network_id, data.camera_id);
+                    }
+                    else
+                    {
+                        button.attr("disabled", true);
+                        self.presenter.requestUnjoin(data.camera_id);
+                    }
                 }
             },
             enumerable: false
@@ -180,7 +188,30 @@
         onRequestLiveView : {
             value: function(data, camera_id)
             {
+                var card = $("#card" + camera_id);
+                card.find(".live-view-button").attr("disabled", true);
+                
                 self.presenter.requestJoin(camera_id, data.server, self.onJoin);
+            },
+            enumerable: false
+        },
+        onUnjoin : {
+            value: function(data, camera_id)
+            {
+                var card = $("#card" + camera_id);
+                card.find(".live-view-button").attr("disabled", true);
+                
+                var video = card.find("video");
+                
+                var button = card.find(".live-view-button");
+                
+                button.attr("disabled", false);
+                button.removeClass("live");
+                button.find(".action").removeClass("fa-eye-slash").addClass("fa-eye");
+                
+                video.hide();
+                
+                video[0].stop();
             },
             enumerable: false
         },
@@ -192,6 +223,12 @@
                     var card = $("#card" + data.camera_id);
                     
                     var video = card.find("video");
+                    
+                    var button = card.find(".live-view-button");
+                    
+                    button.attr("disabled", false);
+                    button.addClass("live");
+                    button.find(".action").removeClass("fa-eye").addClass("fa-eye-slash");
                     
                     video.show();
                     

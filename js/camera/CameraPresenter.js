@@ -146,7 +146,24 @@
                     }));
             },
             enumerable: false
-        }
+        },
+        requestUnjoin : {
+            value: function(camera)
+            {
+                var self = this;
+                    
+                this.interactor.requestUnjoin(camera, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        self.cameraView.onUnjoin(data, camera);
+                    },
+                    function(data)
+                    {
+                        self.cameraView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
     });
 
     presenters.CameraPresenter = CameraPresenter;
