@@ -50,8 +50,30 @@
 				});
             },
             enumerable: false
+        },
+        getUser : {
+            value: function(listener)
+            {
+				$.ajax
+				({
+					type: "GET",
+					url: "https://rest-" + credentials.region + "." + server + "/user",
+                    dataType: 'json',
+					beforeSend: function(xhr) {                        
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
+					},
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(jqxhr.responseJSON);
+					}
+				});
+            },
+            enumerable: false
         }
-        
     });
 
     interactors.LoginInteractor = LoginInteractor;

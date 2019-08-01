@@ -13,7 +13,7 @@
         init : {
             value: function()
             {
-
+                
             },
             enumerable: false
         },
@@ -74,13 +74,38 @@
                     }
                 }
                     
-                var description = data.temperature + " ºF - Updated ";
+                var temperature;
+                
+                if(g_user.temp_units == "c")
+                {
+                    temperature = round(((5/9) * (data.temperature - 32)) , 1);
+                    temperature += "ºC";
+                }
+                else
+                {
+                    temperature = data.temperature + "ºF";
+                    
+                    temperature += "(" + round(((5/9) * (data.temperature - 32)) , 1);
+                    temperature += "ºC)";
+                }
+                    
+                var description = temperature + " - Updated ";
 
                 description += moment(data.updated_at).fromNow();
                
                 card.find(".description").html(description);
                 card.find(".icons").html(icons);
                 card.find(".mdl-button").attr("disabled", false);
+            },
+            enumerable: false
+        },
+        onNetworks : {
+            value: function(data)
+            {
+                $.each( data.networks, function( key, value )
+                {
+                    self.onNetwork(value);
+                });
             },
             enumerable: false
         },
@@ -92,6 +117,18 @@
                     $(".header > div > span").html($(this).data("name"));
                     $(".content").html("<div class='cameraContainer mdl-grid'></a>");
                     
+                    var slider = $("<input/>", {class: "mdl-slider mdl-js-slider", type: "range", id: "camera_slider", min: "320", max: "800", value: "320", step:"50"});
+                    slider.appendTo($(".content .cameraContainer"));
+                    slider.click(function()
+                    {
+                        var value = $(this).val();
+                        
+                        var rest = ((value - 320) / 50) * 16 + 1;
+                        
+                        var card = $(".demo-card-square");
+                        card.css("width", "" + value + "px");
+                        card.css("height", "" + (value * 0.884375 - rest) + "px");
+                    });
                     $.each( data.cameras, function( key, value2 )
                     {
                         self.presenter.getCamera(data.network_id, value2.id, value2.name, self.load);
@@ -109,6 +146,9 @@
                 {
                     var image = card.find(".mdl-card__title");
                     image.css("background-image", "url('data:image/png;base64," + thumbnail + "')");
+                    image.css("background-size", "cover");
+                    image.css("background-repeat", "no-repeat");
+                    
                     image.find(".mdl-spinner").hide();
                 });
             },
@@ -211,7 +251,7 @@
                 
                 video.hide();
                 
-                video[0].stop();
+                video[0].pause();
             },
             enumerable: false
         },

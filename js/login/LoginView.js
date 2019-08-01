@@ -37,14 +37,9 @@
             {
                 $("#login .progress").hide();
                 
-                var userName = $("#login .user").val();
+                g_user = data;
                 
-                if(userName == "")
-                {
-                    userName = "Recovered session";
-                }
-                
-                $(".avatar-dropdown > span").html(userName);
+                $(".avatar-dropdown > span").html(data.email);
                 $("#login")[0].close();
             },
             enumerable: false

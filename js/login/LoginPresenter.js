@@ -28,9 +28,7 @@
                         
                         credentials.token = data.authtoken.authtoken;
 
-                        self.loginView.load(data);
-                        self.activityView.onLogin(data);
-                        self.networkView.onLogin(data);
+                        self.getUser();
                     },
                     function(data)
                     {
@@ -54,9 +52,7 @@
                         
                         credentials.token = data.authtoken.authtoken;
 
-                        self.loginView.load(data);
-                        self.activityView.onLogin(data);
-                        self.networkView.onLogin(data);
+                        self.getUser();
                     },
                     function(data)
                     {
@@ -64,7 +60,26 @@
                     }));
             },
             enumerable: false
-        }
+        },
+        getUser : {
+            value: function()
+            {
+                var self = this;
+                    
+                this.interactor.getUser(new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        self.loginView.load(data);
+                        self.activityView.onLogin(data);
+                        self.networkView.onLogin(data);
+                    },
+                    function(data)
+                    {
+                        self.loginView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
     });
 
     presenters.LoginPresenter = LoginPresenter;
