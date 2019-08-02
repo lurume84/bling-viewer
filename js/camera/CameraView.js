@@ -21,33 +21,47 @@
             value: function(data)
             {
                 var card = $("<div/>", {id: "card" + data.camera_id, class: "demo-card-square mdl-card mdl-shadow--2dp"});
-                    
-                var serial = " (" + data.serial + ")";
                 
                 var loading = "<div class='mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active'></div>";
                 
-                var title = $("<div/>", {class: "mdl-card__title mdl-card--expand", html: loading + "<h2 class='mdl-card__title-text'>" + data.name + serial + "</h2>"});
+                var title = $("<div/>", {class: "mdl-card__title mdl-card--expand", html: loading + "<h2 class='mdl-card__title-text'>" + data.name + "</h2>"});
                 var text = $("<div/>", {class: "mdl-card__supporting-text", html: "<div class='description'></div><div class='icons'></div>"});
                 var actions = $("<div/>", {class: "mdl-card__actions mdl-card--border", 
                                             html: "<a class='thumbnail-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
                                                     "<i class='action fas fa-camera' title='Get thumbnail'></i>" + 
                                                     "</a>" +
                                                     "<a class='live-view-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
-                                                    "<i class='action fas fa-eye' title='Live view'></i>" + 
+                                                    "<i class='action fas fa-eye' title='Live view'></i>" +
+                                                    "<a class='more-info-button mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'>" +
+                                                    "<i class='action fas fa-ellipsis-h' title='More info'></i>" + 
                                                     "</a><video controls></video>"                                                    
                                             });
                                             
                 actions.find(".thumbnail-button").click(function(){self.requestThumbnail(data);});
                 actions.find(".live-view-button").click(function(){self.clickLiveView(data);});
+                actions.find(".more-info-button").click(function(){self.clickMoreInfo(data);});
+                
+                var advancedData = "<ul>" + 
+                                    "<li><span>Serial number:</span> " + data.serial + "</li>" +
+                                    "<li><span>Ip: </span>" + data.ip_address + "</li>" +
+                                    "<li><span>MAC: </span>" + data.mac + "</li>" +
+                                    "<li><span>Battery voltage: </span>" + data.battery_voltage + "</li>" +
+                                    "<li><span>Wifi strength: </span>" + data.wifi_strength + "</li>" +
+                                    "<li><span>Firmware version: </span>" + data.fw_version + "</li>" +
+                                    "<li><span>Created: </span>" + data.created_at + "</li>" +
+                                    "</ul>";
+                
+                var advanced = $("<div/>", {class: "advanced", html: advancedData});
                 
                 title.appendTo(card);
+                advanced.appendTo(card);
                 text.appendTo(card);
                 actions.appendTo(card);
                 
                 self.updateContent(card, data);
                 self.getThumbnail(card, data);
                 
-                card.appendTo($(".content .cameraContainer"));
+                card.appendTo($("#networkContainer" + data.network_id).find(".cameraContainer"));
                 
                 componentHandler.upgradeDom();
             },
@@ -102,6 +116,35 @@
         onNetworks : {
             value: function(data)
             {
+                self.onDashboard(data);
+                
+                $("#dashboard").click(function(evt)
+                {
+                    self.onDashboard(data);
+                    evt.preventDefault();
+                });
+                
+                $.each( data.networks, function( key, value )
+                {
+                    $("#network" + value.network_id).click(function(evt)
+                    {
+                        $(".header > div > span").html("Networks");
+                
+                        self.initContent();
+                        self.onNetwork(value);
+                        evt.preventDefault();
+                    });
+                });
+            },
+            enumerable: false
+        },
+        onDashboard : {
+            value: function(data)
+            {
+                $(".header > div > span").html("Dashboard");
+                    
+                self.initContent();
+                
                 $.each( data.networks, function( key, value )
                 {
                     self.onNetwork(value);
@@ -112,29 +155,31 @@
         onNetwork : {
             value: function(data)
             {
-                $("#network" + data.network_id).click(function(evt)
+                $(".content").append("<div id='networkContainer" + data.network_id + "'><h4 class='title'>" + data.name + "</h4><div class='cameraContainer mdl-grid'></div></div>");
+                
+                $.each( data.cameras, function( key, value2 )
                 {
-                    $(".header > div > span").html($(this).data("name"));
-                    $(".content").html("<div class='cameraContainer mdl-grid'></a>");
+                    self.presenter.getCamera(data.network_id, value2.id, value2.name, self.load);
+                });
+            },
+            enumerable: false
+        },
+        initContent : {
+            value: function(card, data)
+            {
+                $(".content").html("");
                     
-                    var slider = $("<input/>", {class: "mdl-slider mdl-js-slider", type: "range", id: "camera_slider", min: "320", max: "800", value: "320", step:"50"});
-                    slider.appendTo($(".content .cameraContainer"));
-                    slider.click(function()
-                    {
-                        var value = $(this).val();
-                        
-                        var rest = ((value - 320) / 50) * 16 + 1;
-                        
-                        var card = $(".demo-card-square");
-                        card.css("width", "" + value + "px");
-                        card.css("height", "" + (value * 0.884375 - rest) + "px");
-                    });
-                    $.each( data.cameras, function( key, value2 )
-                    {
-                        self.presenter.getCamera(data.network_id, value2.id, value2.name, self.load);
-                    });
+                var slider = $("<input/>", {class: "mdl-slider mdl-js-slider", type: "range", id: "camera_slider", min: "320", max: "800", value: "320", step:"50"});
+                slider.appendTo($(".content"));
+                slider.click(function()
+                {
+                    var value = $(this).val();
                     
-                    evt.preventDefault();
+                    var rest = ((value - 320) / 50) * 16 + 1;
+                    
+                    var card = $(".demo-card-square");
+                    card.css("width", "" + value + "px");
+                    card.css("height", "" + (value * 0.884375 - rest) + "px");
                 });
             },
             enumerable: false
@@ -220,6 +265,31 @@
                     {
                         button.attr("disabled", true);
                         self.presenter.requestUnjoin(data.camera_id);
+                    }
+                }
+            },
+            enumerable: false
+        },
+        clickMoreInfo : {
+            value: function(data)
+            {
+                var card = $("#card" + data.camera_id);
+                
+                var button = card.find(".more-info-button");
+                
+                if(!button.prop('disabled'))
+                {
+                    var advanced = card.find(".advanced");
+                    
+                    if(!button.hasClass("live"))
+                    {
+                        button.addClass("live");
+                        advanced.show();
+                    }
+                    else
+                    {
+                        button.removeClass("live");
+                        advanced.hide();
                     }
                 }
             },

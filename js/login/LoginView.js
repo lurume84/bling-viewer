@@ -41,6 +41,9 @@
                 
                 $(".avatar-dropdown > span").html(data.email);
                 $("#login")[0].close();
+                
+                var dashboard = $("<a/>", {id: "dashboard", class: "mdl-navigation__link", href: "#", html: "<i class='fas fa-home'></i>Dashboard"});
+                dashboard.appendTo($(".drawer .navigation"));
             },
             enumerable: false
         },

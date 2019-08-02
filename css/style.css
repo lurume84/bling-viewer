@@ -227,6 +227,7 @@
   color: #fff;
   background-color: #fff;
   background-size: contain;
+  text-shadow: 2px 2px #000;
 }
 
 .demo-card-square > .mdl-card__title .mdl-spinner 
@@ -325,9 +326,41 @@
     background-position: center center; 
 }
 
-.cameraContainer .mdl-slider__container
+.content .mdl-slider__container
 {
-    position:fixed;
-    right: 0px;
-    bottom: 10px;
+    position:absolute;
+    right: 5px;
+    top: 15px;
+}
+
+.demo-card-square .advanced
+{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: calc(100% - 103px);
+    overflow: auto;
+    background-color: #fff;
+    font-size: 12px;
+    
+}
+
+.demo-card-square .advanced ul
+{
+    list-style: none;
+    padding-left: 10px;
+}
+
+.demo-card-square .advanced ul li span
+{
+    font-weight: 600;
+}
+
+.content h4
+{
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
