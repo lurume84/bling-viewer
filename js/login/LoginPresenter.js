@@ -69,6 +69,8 @@
                 this.interactor.getUser(new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
+                        credentials.account_id = data.account_id;
+                        
                         self.loginView.load(data);
                         self.activityView.onLogin(data);
                         self.networkView.onLogin(data);

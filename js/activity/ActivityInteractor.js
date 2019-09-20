@@ -13,7 +13,7 @@
 				return $.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v1/accounts/a" + "/media/changed?since=-999999999-01-01T00:00:00+18:00&page=" + page,
+					url: "https://rest-" + credentials.region + "." + server + "/api/v1/accounts/" + credentials.account_id + "/media/changed?since=-999999999-01-01T00:00:00+18:00&page=" + page,
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
