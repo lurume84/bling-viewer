@@ -78,6 +78,8 @@
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
+            
+    background-color: #0088CC;
   }
   .layout .navigation .mdl-navigation__link {
     display: -webkit-flex !important;
@@ -89,15 +91,39 @@
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
-    color: rgba(255, 255, 255, 0.56);
-    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+
+        opacity: 1;
+        padding-left:20;
+        
+        border-left: 3px solid transparent;
+  }
+  
+  .layout .navigation .mdl-navigation__link span
+  {
+    font-size: 15px;
   }
   .layout .navigation .mdl-navigation__link:hover {
     background-color: #3FA0D6;
     color: #fff;
   }
+  
+  .header
+  {
+      display: none;
+      background: none;
+      min-height: 20px;
+      box-shadow: none;
+  }
+  
+  .layout .navigation .mdl-navigation__link.selected {
+    background-color: #3FA0D6;
+    color: #fff;
+    border-color: #fff;
+  }
+  
   .navigation .mdl-navigation__link .fas {
-    color: rgba(255, 255, 255, 0.56);
+    color: rgba(255, 255, 255, 1);
     margin-right: 14px;
   }
   
@@ -122,38 +148,49 @@
     padding:0px !important;
   }
   
-  .content table.activity .icon
+  .content ul.activity
+  {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      width:100%;
+      height:100%;
+  }
+  
+  .content ul.activity .icon
   {
       width: 50px;
   }
   
-  .thumbnail
+  .content ul.activity li
   {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0 !important;
+    width:100%;
   }
   
-  .thumbnail .loadingContainer
+  .content ul.activity li .loadingContainer
   {
     margin: auto;
     width: 50%;
   }
   
-  .content table.activity td
+  .content ul.activity li > .thumbnail
   {
-    padding: 0 !important;
+      width: 100%;
+      height: 100px;
   }
   
-  .content table.activity thead th
+  .content ul.activity li .timeVideo
   {
-      padding-top: 5px !important;
-  }
-  
-  .content table.activity tr.selected
-  {
+      margin-left: 5px;
       color: #fff;
-      background-color: #3FA0D6 !important;
+      text-shadow: 2px 2px #000;
+  }
+  
+  .content ul.activity li.selected .thumbnail
+  {
+      border: 3px solid transparent;
+      border-color: #3FA0D6 !important;
   }
   
   .content .tableContainer, .content .videoContainer
@@ -168,46 +205,31 @@
   
   .content .tableContainer
   {
-      width: 20%;
-      height:88vh;
+      width: 200px;
+      height:100%;
       overflow-y:auto;
       overflow-x:hidden;
-  }
-  
-  table
-  {
-    border:none;
-    border-collapse:collapse;
-  }
-  
-  table tr
-  {
-    cursor:pointer;
-  }
-  
-  table tr.separator
-  {
-    height:1px;
-    background-color:#c0c0c0;
+      background-color: rgba(0, 0, 0, 1);
   }
   
   .content .videoContainer
   {
-      width: 80%;
+      width: calc(100% - 200px);
   }
   
   .content .videoContainer video
   {
       width:100%;
+      height:100%;
   }
   
   .content .videoThumbnail
   {
-    background-size: contain;
+    background-size: cover;
     margin-top: 1px;
     margin-bottom: 1px;
-    width: 80px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
   }
   
   .actions i
@@ -328,9 +350,9 @@
 
 .content .mdl-slider__container
 {
-    position:absolute;
+    position:fixed;
     right: 5px;
-    top: 15px;
+    bottom: 15px;
 }
 
 .demo-card-square .advanced
@@ -363,4 +385,100 @@
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 0px;
+}
+
+#draggable-window {
+    -webkit-app-region: drag;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: calc(100% - 50px);
+    height: 30px;
+    z-index: 999;
+}
+
+.navigation ul
+{
+    position: fixed;
+    bottom: 10px;
+    left: 35px;
+    list-style-type: none;
+}
+
+.navigation ul li
+{
+    cursor: pointer;
+    color:#fff;
+}
+
+.navigation ul li span
+{
+    margin-left: 5px;
+}
+
+#toolbar-window
+{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 30px;
+  z-index:997;
+}
+
+#toolbar-window div
+{
+  width: 50px;
+  height: 30px; 
+  text-align:center;
+  float:left;
+}
+
+#toolbar-window div i
+{
+  margin-top: 8px;
+}
+
+#toolbar-window .close:hover
+{
+  background-color: #CD1A2B;
+  color: #fff;
+}
+
+#toolbar-window .maximize:hover, #toolbar-window .minimize:hover
+{
+  background-color: #C7CACF;
+}
+
+#networkContainer
+{
+    margin-top: 20px;
+}
+
+
+#upgrade
+{
+    display:none;
+    position:fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    color: #fff;
+    padding: 5px;
+    z-index: 999;
+    background-color: #FFD800;
+    cursor: pointer;
+}
+
+#upgrade i
+{
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#upgrade a
+{
+    color: #fff;
+    font-weight: 600;
 }

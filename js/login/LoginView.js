@@ -42,7 +42,7 @@
                 $(".avatar-dropdown > span").html(data.email);
                 $("#login")[0].close();
                 
-                var dashboard = $("<a/>", {id: "dashboard", class: "mdl-navigation__link", href: "#", html: "<i class='fas fa-home'></i>Dashboard"});
+                var dashboard = $("<a/>", {id: "dashboard", class: "mdl-navigation__link selected", href: "#", html: "<i class='fas fa-home'></i><span>Dashboard</span>"});
                 dashboard.appendTo($(".drawer .navigation"));
             },
             enumerable: false

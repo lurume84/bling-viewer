@@ -27,7 +27,10 @@
                         });
                         
                         credentials.token = data.authtoken.authtoken;
+                        
+                        credentials.account = data.account;
 
+                        self.interactor.setToken(data);
                         self.getUser();
                     },
                     function(data)
@@ -51,6 +54,8 @@
                         });
                         
                         credentials.token = data.authtoken.authtoken;
+                        
+                        credentials.account = data.account;
 
                         self.getUser();
                     },
@@ -69,8 +74,6 @@
                 this.interactor.getUser(new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        credentials.account_id = data.account_id;
-                        
                         self.loginView.load(data);
                         self.activityView.onLogin(data);
                         self.networkView.onLogin(data);

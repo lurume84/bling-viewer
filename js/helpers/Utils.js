@@ -1,22 +1,33 @@
-moment.locale('en', {
-    relativeTime: {
-      future: 'in %s',
-      past: '%s',
-      s:  'seconds',
-      ss: '%ss',
-      m:  '1 min',
-      mm: '%d min',
-      h:  '1 hour',
-      hh: '%d hours',
-      d:  '1 day',
-      dd: '%d days',
-      M:  '1 month',
-      MM: '%d months',
-      y:  '1 year',
-      yy: '%d years'
-    }
-  });
-
+$(document).ready(function ()
+{      
+    $("#toolbar-window .minimize").click(function()
+    {
+         
+    });
+    
+    $("#toolbar-window .maximize").click(function()
+    {
+        
+    });
+    
+    $("#toolbar-window .close").click(function()
+    {
+       window.close();   
+    });
+    
+    $("#upgrade").click(function()
+    {
+        location.reload();
+    });
+    
+    $(document).on("upgrade", function (evt, version)
+    {
+        $("#upgrade").show();
+        $("#draggable-window").hide();
+        $("#upgrade").find("span").html(version);
+    });
+});  
+  
 function round(value, numDec)
 {
     var dec = Math.pow(10, numDec);

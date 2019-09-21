@@ -21,10 +21,12 @@
         onLogin : {
             value: function()
             {
-                var activity = $("<a/>", {class: "mdl-navigation__link", href: "#", html: "<i class='fas fa-running'></i>Activity"});
+                var activity = $("<a/>", {class: "mdl-navigation__link", href: "#", html: "<i class='fas fa-running'></i><span>Activity</span>"});
                 
                 activity.click(function(evt)
                 {
+                    $(this).addClass("selected").siblings().removeClass("selected");
+                    
                     self.presenter.getCameras();
                     evt.preventDefault();
                 });
@@ -43,9 +45,8 @@
         initTable : {
             value: function(cameras)
             {
-                $(".header > div > span").html("Activity");
-                $(".content").html("<div class='videoContainer'></div>"+
-                                    "<div class='tableContainer'><table class='activity' class='display' width='100%'></table></div>");
+                $(".content").html("<div class='tableContainer'><ul class='activity display' width='100%'></ul></div>" +
+                                    "<div class='videoContainer'></div>");
                 
                 this.cameras = cameras;
                 
@@ -53,7 +54,7 @@
                 
                 self.loadVideos(i, function()
                 {
-                    $('table.activity tr:nth-child(2)').trigger( 'click');
+                   $('ul.activity li:nth-child(1)').trigger( 'click');
                 });
                 
                 $(".tableContainer").scroll(function()
@@ -76,10 +77,8 @@
                     
                     if(data.media != undefined)
                     {
-                        var table = $("table.activity");
-                        
-                        $("<tr/>", {html: "<td></td><td></td><td></td>", class: "separator"}).appendTo(table);
-                        
+                        var ul = $("ul.activity");
+                       
                         $.each( data.media, function( key, value )
                         {
                             if(!value.deleted)
@@ -96,40 +95,15 @@
                                 }
                                 var cameraName = icon + value.camera_name;
                                 
-                                var tr = $("<tr/>");
-                                tr.appendTo(table);
+                                var li = $("<li/>", {"data-path" : value.media, html: '<div class="thumbnail"><div class="loadingContainer"><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></div></div>'});
+                                li.appendTo(ul);
                                 
-                                var thumbnail = $("<td/>", {html: '<div class="thumbnail" id="thumbnail' + tr.index() + '"><div class="loadingContainer"><div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div></div></div>'});
-                                var cameraName = $("<td/>", {html: icon + value.camera_name});
-                                var time = $("<td/>", {html: moment(value.created_at).fromNow()});
-                                var duration = $("<td/>", {html: moment.utc(value.length * 1000).format('HH:mm:ss')});
-                                var video = $("<td/>", {html: '<div class="actions"><i class="download fas fa-download" data-path="' + value.media + '"></i></div>'});
+                                var time = $("<div/>", {html: moment(value.created_at).fromNow(), class: "timeVideo"});
                                 
-                                thumbnail.appendTo(tr);
-                                //cameraName.appendTo(tr);
-                                time.appendTo(tr);
-                                //duration.appendTo(tr);
-                                video.appendTo(tr);
-                                
-                                video.find(".download").click(function(evt)
-                                {
-                                    var path = $(this).data("path");
-                                    self.presenter.downloadMedia(path, function(data)
-                                    {
-                                        var a = document.createElement('a');
-                                        var url = window.URL.createObjectURL(data);
-                                        a.href = url;
-                                        a.download = path.replace(/^.*[\\\/]/, '');
-                                        a.click();
-                                        window.URL.revokeObjectURL(url);
-                                    });
-                                    
-                                    evt.preventDefault();
-                                });
                                 
                                 self.presenter.getMedia(value.thumbnail + "_s.jpg", function(content)
                                 {
-                                    var container = $("#thumbnail" + tr.index());
+                                    var container = li.find(".thumbnail");
                                     
                                     container.html("");
                                     
@@ -137,20 +111,19 @@
                                     thumbnail.css("background-image", "url('data:image/png;base64," + content + "')");
                                     
                                     thumbnail.appendTo(container);
+                                    
+                                    time.prependTo(thumbnail);
                                 });
                                 
-                                tr.on( 'click', function ()
+                                li.on('click', function ()
                                 {
-                                    var table = $(this).parent();
-                                    
-                                    table.find('tr.selected').removeClass('selected');
-                                    $(this).addClass('selected');
+                                    $(this).addClass('selected').siblings().removeClass('selected');
                                     
                                     $(".videoContainer").html("<div class=\"mdl-progress mdl-js-progress mdl-progress__indeterminate\"></div>");
                                     
                                     componentHandler.upgradeAllRegistered();
                                     
-                                    var path = $(this).find(".actions i").data("path");
+                                    var path = $(this).data("path");
                                     
                                     self.presenter.getMedia(path, function(content)
                                     {

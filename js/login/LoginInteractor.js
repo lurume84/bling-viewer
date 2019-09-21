@@ -31,13 +31,42 @@
             },
             enumerable: false
         },
+        setToken : {
+            value: function(data, listener)
+            {
+                $.ajax
+				({
+					type: "POST",
+					url: "/data/token.json",
+					data: JSON.stringify(data),
+					dataType: 'json',
+                    contentType: 'application/json',
+                    beforeSend: function(xhr)
+                    {
+                        //$.xhrPool.push(xhr);
+					},
+					success: function (json)
+					{
+						listener.onSuccess(json);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						if(textStatus != "abort")
+                        {
+                            listener.onError(jqxhr.responseJSON);
+                        }
+					}
+				});
+            },
+            enumerable: false
+        },
         getToken : {
             value: function(listener)
             {
 				$.ajax
 				({
 					type: "GET",
-					url: "token.json",
+					url: "/data/token.json",
 					dataType: 'json',
 					success: function (json)
 					{

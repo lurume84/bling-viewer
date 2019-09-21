@@ -61,7 +61,7 @@
                 self.updateContent(card, data);
                 self.getThumbnail(card, data);
                 
-                card.appendTo($("#networkContainer" + data.network_id).find(".cameraContainer"));
+                card.appendTo($("#networkContainer").find(".cameraContainer"));
                 
                 componentHandler.upgradeDom();
             },
@@ -120,6 +120,7 @@
                 
                 $("#dashboard").click(function(evt)
                 {
+                    $(this).addClass("selected").siblings().removeClass("selected");
                     self.onDashboard(data);
                     evt.preventDefault();
                 });
@@ -128,9 +129,9 @@
                 {
                     $("#network" + value.network_id).click(function(evt)
                     {
-                        $(".header > div > span").html("Networks");
-                
+                        $(this).addClass("selected").siblings().removeClass("selected");
                         self.initContent();
+                        $(".content").append("<div id='networkContainer'><div class='cameraContainer mdl-grid'></div></div>");
                         self.onNetwork(value);
                         evt.preventDefault();
                     });
@@ -140,10 +141,10 @@
         },
         onDashboard : {
             value: function(data)
-            {
-                $(".header > div > span").html("Dashboard");
-                    
+            {   
                 self.initContent();
+                
+                $(".content").append("<div id='networkContainer'><div class='cameraContainer mdl-grid'></div></div>");
                 
                 $.each( data.networks, function( key, value )
                 {
@@ -155,8 +156,6 @@
         onNetwork : {
             value: function(data)
             {
-                $(".content").append("<div id='networkContainer" + data.network_id + "'><h4 class='title'>" + data.name + "</h4><div class='cameraContainer mdl-grid'></div></div>");
-                
                 $.each( data.cameras, function( key, value2 )
                 {
                     self.presenter.getCamera(data.network_id, value2.id, value2.name, self.load);
@@ -171,7 +170,7 @@
                     
                 var slider = $("<input/>", {class: "mdl-slider mdl-js-slider", type: "range", id: "camera_slider", min: "320", max: "800", value: "320", step:"50"});
                 slider.appendTo($(".content"));
-                slider.click(function()
+                slider.change(function()
                 {
                     var value = $(this).val();
                     
@@ -181,6 +180,8 @@
                     card.css("width", "" + value + "px");
                     card.css("height", "" + (value * 0.884375 - rest) + "px");
                 });
+                
+                componentHandler.upgradeDom();
             },
             enumerable: false
         },
