@@ -13,7 +13,8 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v1/camera/usage",
+					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/api/v1/camera/usage",
+					// url: "usage.json",
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -36,7 +37,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/network/" + networkId,
+					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/network/" + networkId,
 					dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);

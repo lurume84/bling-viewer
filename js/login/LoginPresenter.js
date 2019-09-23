@@ -27,7 +27,7 @@
                         });
                         
                         credentials.token = data.authtoken.authtoken;
-                        
+
                         credentials.account = data.account;
 
                         self.interactor.setToken(data);

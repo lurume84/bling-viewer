@@ -13,7 +13,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://prod." + server + "/login",
+					url: proxy_prefix + "https://prod." + server + "/login",
 					data: {"email": user, "password": password},
 					dataType: 'json',
 					beforeSend: function(xhr) { 
@@ -86,7 +86,8 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/user",
+					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/user",
+					// url: "user.json",
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
