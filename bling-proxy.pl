@@ -5,6 +5,7 @@ use Mojolicious::Lite;
 use Mojo::Log;
 use LWP::UserAgent;
 use HTTP::Request;
+use URI::Escape;
 my $log = Mojo::Log->new(path => 'proxy.log', level => 'info');
 
 my $proxy_host = "localhost";
@@ -51,7 +52,7 @@ sub relay_data_with_headers {
     my $timeout = 4;
     while (1) { # "infine" loop for retries (normal exit via "return")
 
-        my $remote_url = substr($page,1); # strip leading /
+        my $remote_url = uri_unescape(substr($page,1)); # strip leading /
         my ($remote_hostport) = $remote_url =~ m{://([^/]+)};
         my ($remote_host, $remote_port) = split(":", $remote_hostport, 2);
         $remote_port //= $remote_url =~ m{^https:} ? 443 : 80;

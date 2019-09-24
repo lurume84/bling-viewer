@@ -13,7 +13,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/network/" + networkId + "/camera/" + cameraId,
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + networkId + "/camera/" + cameraId,
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -36,7 +36,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + path + ".jpg",
+					url: "https://rest-" + credentials.region + "." + server + path + ".jpg",
                     mimeType: "text/plain; charset=x-user-defined",
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -59,7 +59,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/network/" + network + "/camera/" + camera + "/thumbnail",
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + network + "/camera/" + camera + "/thumbnail",
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -82,7 +82,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/liveview",
+					url: "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/liveview",
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -105,7 +105,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/network/" + network + "/command/" + command,
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + network + "/command/" + command,
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -128,7 +128,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/join/" + command,
+					url: "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/join/" + command,
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -151,7 +151,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: proxy_prefix + "https://rest-" + credentials.region + "." + server + "/network/" + network + "/update",
+					url: "https://rest-" + credentials.region + "." + server + "/network/" + network + "/update",
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);

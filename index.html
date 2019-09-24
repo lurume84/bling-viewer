@@ -5,7 +5,16 @@
         <link rel="stylesheet" href="lib/fontawesome/css/all.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/fonts.css">
+
         <script src="lib/jquery/jquery.min.js"></script>
+
+        <script>
+            var proxy_prefix = "http://localhost:3000/";
+            $.ajaxPrefilter(function( options ) {
+                options.url = proxy_prefix + encodeURIComponent( options.url );
+            });
+        </script>
+
         <script src="lib/mdl/material.min.js"></script>
         <script src="lib/moment.min.js"></script>
         <script src="lib/hls.js"></script>
@@ -131,7 +140,6 @@
         </div>
     </body>
     <script>
-        var proxy_prefix = "http://localhost:3000/";
         var server = "immedia-semi.com";
         var credentials = {region: "", token: ""};
 
@@ -146,5 +154,6 @@
         {
             new blink.helpers.Initializer();
         })();
+    
     </script>
 </html>
