@@ -20,7 +20,7 @@
         load : {
             value: function(data)
             {
-                var card = $("<div/>", {id: "card" + data.camera_id, class: "demo-card-square mdl-card mdl-shadow--2dp"});
+                var card = $("<div/>", {id: "card" + data.camera_id, class: "camera network-" + data.network_id + " demo-card-square mdl-card mdl-shadow--2dp"});
                 
                 var loading = "<div class='mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active'></div>";
                 
@@ -124,18 +124,6 @@
                     self.onDashboard(data);
                     evt.preventDefault();
                 });
-                
-                $.each( data.networks, function( key, value )
-                {
-                    $("#network" + value.network_id).click(function(evt)
-                    {
-                        $(this).addClass("selected").siblings().removeClass("selected");
-                        self.initContent();
-                        $(".content").append("<div id='networkContainer'><div class='cameraContainer mdl-grid'></div></div>");
-                        self.onNetwork(value);
-                        evt.preventDefault();
-                    });
-                });
             },
             enumerable: false
         },
@@ -144,10 +132,31 @@
             {   
                 self.initContent();
                 
+                var ul = $("<ul/>", {html: "", class: "tabs"});
+                
+                $("<li/>", {html: "All", class: "active"}).click(function()
+                {
+                    $(this).addClass("active").siblings().removeClass("active");
+                    
+                    $(".content").find(".camera").show();
+                    
+                }).appendTo(ul);
+                
                 $(".content").append("<div id='networkContainer'><div class='cameraContainer mdl-grid'></div></div>");
+                
+                ul.prependTo($(".content"));
                 
                 $.each( data.networks, function( key, value )
                 {
+                    $("<li/>", {html: value.name}).click(function()
+                    {
+                        $(this).addClass("active").siblings().removeClass("active");
+                        
+                        $(".content").find(".camera").hide();
+                        $(".content").find(".network-" + value.network_id).show();
+                        
+                    }) .appendTo(ul);
+                    
                     self.onNetwork(value);
                 });
             },
