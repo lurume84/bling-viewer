@@ -21,7 +21,7 @@
         onLogin : {
             value: function()
             {
-                var activity = $("<a/>", {class: "mdl-navigation__link", href: "#", html: "<i class='fas fa-running'></i><span>Activity</span>"});
+                var activity = $("<a/>", {class: "link", href: "#", html: "<i class='fas fa-running'></i>"});
                 
                 activity.click(function(evt)
                 {

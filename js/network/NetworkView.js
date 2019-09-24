@@ -27,17 +27,6 @@
             value: function(data)
             {
                 var self = this;
-                
-                $.each( data.networks, function( key, value )
-                {
-                    var network = $("<a/>", {class: "mdl-navigation__link", 
-                                            id: "network" + value.network_id,
-                                            href: "#", "data-name": value.name, 
-                                            "data-id": value.network_id, 
-                                            html: "<i class='fas fa-network-wired'></i><span>" + value.name + "</span>"});
-                                            
-                    network.appendTo($(".drawer .navigation"));
-                });
             },
             enumerable: false
         },

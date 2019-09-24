@@ -1,0 +1,30 @@
+.tabs
+{
+    display: flex;
+    margin: 20px 0 20px 20px;
+    font-size: 1rem;
+    color: #898B8C;
+    text-transform: uppercase;
+    border-bottom: 1px solid #c0c0c0;
+    list-style: none;
+    padding: 0;
+}
+
+.tabs > li
+{
+    border-bottom: 3px solid transparent;
+    transition: border-color .2s ease;
+    margin: 0 10px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.tabs > li.active {
+    border-color: #0088CC;
+    color: #0088CC;
+}
+
+.tabs > li:first-of-type
+{
+    margin-left: 0;
+}

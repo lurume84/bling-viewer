@@ -1,0 +1,91 @@
+.layout
+{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.layout > div
+{
+    float: left;
+    height: 100%;
+}
+
+.layout > .drawer
+{
+    width: 50px;
+    background-color:red;
+}
+
+.layout > .content
+{
+    width: calc(100% - 50px);
+}
+
+.navigation
+{
+    flex-grow: 1;    
+    background-color: #0088CC;
+    height:100%;
+    padding-top: 30px;
+}
+
+.layout .navigation .link
+{
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+
+    opacity: 1;
+    padding-left:15;
+    height: 50px;
+    border-left: 3px solid transparent;
+}
+
+.layout .navigation .link span
+{
+    font-size: 15px;
+}
+.layout .navigation .link:hover
+{
+    background-color: #3FA0D6;
+    color: #fff;
+}
+
+.layout .navigation .link.selected
+{
+    background-color: #3FA0D6;
+    color: #fff;
+    border-color: #fff;
+}
+
+.navigation .link .fas
+{
+    color: rgba(255, 255, 255, 1);
+    margin-right: 14px;
+}
+
+.navigation .fa-network-wired
+{
+    font-size: 14px;  
+}
+
+.navigation .fa-running
+{
+    font-size: 18px;  
+}
+
+.layout .navigation .separator 
+{
+    margin-left: 14px;
+}
+
+.logo
+{
+    position: fixed;
+    bottom: 7px;
+    left: 10px;
+    width: 30px;
+}
