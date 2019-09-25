@@ -8,14 +8,6 @@
         <link rel="stylesheet" href="css/dashboard.css">
         <link rel="stylesheet" href="css/drawer.css">
         <script src="lib/jquery/jquery.min.js"></script>
-
-        <script>
-            var proxy_prefix = "http://localhost:3000/";
-            $.ajaxPrefilter(function( options ) {
-                options.url = proxy_prefix + encodeURIComponent( options.url );
-            });
-        </script>
-
         <script src="lib/mdl/material.min.js"></script>
         <script src="lib/moment.min.js"></script>
         <script src="lib/hls.js"></script>
@@ -88,6 +80,8 @@
         </div>
     </body>
     <script>
+        $.ajaxPrefilter(function( options ){options.url = "" + options.url;});
+    
         var server = "immedia-semi.com";
         var credentials = {region: "", token: ""};
 
@@ -102,6 +96,5 @@
         {
             new blink.helpers.Initializer();
         })();
-    
     </script>
 </html>
