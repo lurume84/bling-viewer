@@ -171,9 +171,9 @@
         requestJoin : {
             value: function(camera, url, listener)
             {
-                if(url.substring(0, 8) == "rtsps://")
+                if(url.substring(0, 8) == "immis://")
                 {
-                    url = "immis://" + url.substring(8) + "&blinkRTSP=true";
+                    url = "rtsps://" + url.substring(8) + "&blinkRTSP=true";
                 }
                 
 				$.ajax
