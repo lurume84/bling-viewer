@@ -171,11 +171,6 @@
         requestJoin : {
             value: function(camera, url, listener)
             {
-                if(url.substring(0, 8) == "immis://")
-                {
-                    url = "rtsps://" + url.substring(8);
-                }
-                
 				$.ajax
 				({
 					type: "POST",
