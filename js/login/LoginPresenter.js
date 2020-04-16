@@ -28,10 +28,31 @@
                         
                         credentials.token = data.authtoken.authtoken;
 
-                        credentials.account = data.account;
+                        if(data.account == undefined)
+                        {
+                            credentials.account = {id: 0};
+                            
+                            self.loginView.load(data);
+                            self.activityView.onLogin(data);
+                            self.networkView.onLogin(data);
+                            
+                            document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: "No account id: " + JSON.stringify(data), timeout: 10000});
+                        }
+                        else
+                        {
+                            credentials.account = data.account;
 
-                        self.interactor.setToken(data);
-                        self.getUser();
+                            self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(
+                                                    function(data)
+                                                    {
+                                                        
+                                                    },
+                                                    function(data)
+                                                    {
+                                                        
+                                                    }));
+                            self.getUser();   
+                        }
                     },
                     function(data)
                     {
