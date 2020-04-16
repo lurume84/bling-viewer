@@ -30,29 +30,23 @@
 
                         if(data.account == undefined)
                         {
-                            credentials.account = {id: 0};
-                            
-                            self.loginView.load(data);
-                            self.activityView.onLogin(data);
-                            self.networkView.onLogin(data);
+                            data.account = {id: 0};
                             
                             document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: "No account id: " + JSON.stringify(data), timeout: 10000});
                         }
-                        else
-                        {
-                            credentials.account = data.account;
+                        
+                        credentials.account = data.account;
 
-                            self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(
-                                                    function(data)
-                                                    {
-                                                        
-                                                    },
-                                                    function(data)
-                                                    {
-                                                        
-                                                    }));
-                            self.getUser();   
-                        }
+                        self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(
+                                                function(data)
+                                                {
+                                                    
+                                                },
+                                                function(data)
+                                                {
+                                                    
+                                                }));
+                        self.getUser();   
                     },
                     function(data)
                     {
