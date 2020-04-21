@@ -370,7 +370,7 @@
                         switch (data.details)
                         {
                             case Hls.ErrorDetails.MANIFEST_LOAD_ERROR:
-                                console.warn("Cannot load " + url + '. Code ' + data.response.code + ' . Text: ' + data.response.text);
+                                console.warn("Cannot load " + data.url + '. Code ' + data.response.code + ' . Text: ' + data.response.text);
                                 break;
                             case Hls.ErrorDetails.MANIFEST_LOAD_TIMEOUT:
                                 console.warn('Timeout while loading manifest');
