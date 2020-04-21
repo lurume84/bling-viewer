@@ -2,12 +2,12 @@ $(document).ready(function ()
 {      
     $("#toolbar-window .minimize").click(function()
     {
-         
+       window.minimize();   
     });
     
     $("#toolbar-window .maximize").click(function()
     {
-        
+       window.maximize();   
     });
     
     $("#toolbar-window .close").click(function()
