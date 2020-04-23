@@ -28,6 +28,7 @@
                     componentHandler.upgradeAllRegistered();
                     
                     self.presenter.checkToken();
+                    self.presenter.checkVersion();
                 });
             },
             enumerable: false
@@ -44,6 +45,25 @@
                 
                 var dashboard = $("<a/>", {id: "dashboard", class: "link selected", href: "#", html: "<i class='fas fa-home'></i>"});
                 dashboard.appendTo($(".drawer .navigation"));
+            },
+            enumerable: false
+        },
+		versionFound : {
+            value: function(data)
+            {
+                $("#version .desktop .number").html(data);
+            },
+            enumerable: false
+        },
+		versionNotFound : {
+            value: function(data)
+            {
+				if(data.status == 404)
+				{
+					window.location = "https://github.com/lurume84/bling-desktop/releases/download/v0.1.16/BlingSetup.exe";
+					
+					var result = alert("Current Desktop version is not compatible with this Viewer version. Close the application and install latest one from Documents\\Bling.exe\\Download\\Versions\\BlingSetup.exe.");
+				}
             },
             enumerable: false
         },

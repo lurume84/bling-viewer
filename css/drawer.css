@@ -82,10 +82,31 @@
     margin-left: 14px;
 }
 
-.logo
+#version
 {
     position: fixed;
-    bottom: 7px;
-    left: 10px;
-    width: 30px;
+    bottom: 8px;
+    left: 0px;
+    width: 50px;
+}
+
+#version .title
+{
+	font-size: 12px;
+	color: #fff;
+    text-shadow: 2px 2px #000;
+	text-align:center;
+}
+
+#version .title a
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+#version .number
+{
+	font-size: 12px;
+	color: #fff;
+	text-align:center;
 }

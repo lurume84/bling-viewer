@@ -81,6 +81,23 @@
             },
             enumerable: false
         },
+		checkVersion : {
+            value: function()
+            {
+                var self = this;
+                    
+                this.interactor.getVersion(new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+                        self.loginView.versionFound(data);
+                    },
+                    function(data)
+                    {
+                        self.loginView.versionNotFound(data);
+                    }));
+            },
+            enumerable: false
+        },
         getUser : {
             value: function()
             {

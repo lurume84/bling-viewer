@@ -179,7 +179,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "http://127.0.0.1:9292",
+					url: "http://127.0.0.1:9192",
                     data: JSON.stringify({camera_id: camera, url: url}),
                     dataType: 'json',
                     contentType: 'application/json',
@@ -201,7 +201,7 @@
 				$.ajax
 				({
 					type: "DELETE",
-					url: "http://127.0.0.1:9292?camera_id=" + camera,
+					url: "http://127.0.0.1:9192?camera_id=" + camera,
 					success: function (data)
 					{
 						listener.onSuccess(data);

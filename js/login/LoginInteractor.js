@@ -103,6 +103,25 @@
 				});
             },
             enumerable: false
+        },
+		getVersion : {
+            value: function(listener)
+            {
+				$.ajax
+				({
+					type: "GET",
+					url: "/version",
+					success: function (data)
+					{
+						listener.onSuccess(data);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(jqxhr);
+					}
+				});
+            },
+            enumerable: false
         }
     });
 
