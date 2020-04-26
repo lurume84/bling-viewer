@@ -62,7 +62,8 @@
                 return this.interactor.getVideos(page, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        callback(data, 500);
+						data.media.sort((a, b) => moment(b.created_at).toDate() - moment(a.created_at).toDate());
+                        callback(data);
                     },
                     function(data)
                     {

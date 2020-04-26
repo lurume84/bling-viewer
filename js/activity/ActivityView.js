@@ -71,7 +71,7 @@
         loadVideos : {
             value: function(page, loaded)
             {
-                self.presenter.getVideos(page, function(data, count)
+                self.presenter.getVideos(page, function(data)
                 {
                     var events = [];
                     
