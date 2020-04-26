@@ -1,7 +1,7 @@
 # Bling viewer
 Blink Home Security Camera is a great product but currenty lacks of an official web viewer. This project is an attempt to create a web viewer that complements the current Mobile application. In conjuntion with [Bling Desktop](https://github.com/lurume84/bling-desktop) project, it works as a Desktop solution for Blink Systems.
 
-**If you want to use this in your Windows you need to install [Bling Desktop](https://github.com/lurume84/bling-desktop). It will automatically download this repository, do not try to execute index.html as will not work because of security restrictions in browsers.**
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `If you want to use this in your Windows you need to install [Bling Desktop](https://github.com/lurume84/bling-desktop). It will automatically download this repository, do not try to execute index.html as will not work because of security restrictions in browsers`
 
 ## Example
 ### Networks
