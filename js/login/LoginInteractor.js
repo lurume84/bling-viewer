@@ -45,7 +45,6 @@
 					dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
-						xhr.setRequestHeader("ACCOUNT_ID", credentials.account.id);
 					},
 					success: function (json)
 					{
@@ -118,7 +117,6 @@
 					dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
-						xhr.setRequestHeader("ACCOUNT_ID", credentials.account.id);
 					},
 					success: function (data)
 					{

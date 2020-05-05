@@ -30,14 +30,6 @@
 						
                         credentials.region = data.region.tier;
                         credentials.token = data.authtoken.authtoken;
-
-                        if(data.account == undefined)
-                        {
-                            data.account = {id: 0};
-                            
-                            document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: "No account id: " + JSON.stringify(data), timeout: 10000});
-                        }
-                        
                         credentials.account = data.account;
                         credentials.client = data.client;
 
@@ -91,14 +83,10 @@
                 this.interactor.getToken(new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        $.each( data.region, function( key, value )
-                        {
-                            credentials.region = key;
-                        });
-                        
+                        credentials.region = data.region.tier;
                         credentials.token = data.authtoken.authtoken;
-                        
                         credentials.account = data.account;
+                        credentials.client = data.client;
 
                         self.getUser();
                     },
