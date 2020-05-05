@@ -24,6 +24,8 @@
                 this.interactor.login(user, password, uid, notification_key, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
+						data.server = "rest-" + data.region.tier + "." + server;
+						data.port = 443;
 						data.user = user;
 						data.uid = uid;
 						data.notification_key = notification_key;
