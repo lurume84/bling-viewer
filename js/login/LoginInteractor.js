@@ -8,16 +8,44 @@
     Object.defineProperties(LoginInteractor.prototype,
     {
         login : {
-            value: function(user, password, listener)
+            value: function(user, password, uid, notification_key, listener)
             {
 				$.ajax
 				({
 					type: "POST",
-					url: "https://prod." + server + "/login",
-					data: {"email": user, "password": password},
+					url: "https://prod." + server + "/api/v4/account/login",
+					data: {	"app_version":"6.0.7 (520300) #afb0be72a", "client_name": "Computer", 
+							"client_type": "android", "device_identifier": "Bling Desktop", 
+							"email": user, "notification_key": notification_key, "os_version": "5.1.1", "password": password, 
+							"reauth":true, "unique_id": uid},
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						
+					},
+					success: function (json)
+					{
+						listener.onSuccess(json);
+					},
+					error: function (jqxhr, textStatus, error)
+					{
+						listener.onError(jqxhr.responseJSON);
+					}
+				});
+            },
+            enumerable: false
+        },
+		verify : {
+            value: function(key, listener)
+            {
+				$.ajax
+				({
+					type: "POST",
+					url: "https://rest-" + credentials.region + "." + server + "/api/v4/account/" + credentials.account.id + "/client/" + credentials.client.id + "/pin/verify/",
+					data: {"pin": key},
+					dataType: 'json',
+					beforeSend: function(xhr) {                        
+						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
+						xhr.setRequestHeader("ACCOUNT_ID", credentials.account.id);
 					},
 					success: function (json)
 					{

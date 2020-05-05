@@ -17,11 +17,19 @@
                 $(document).ready(function ()
                 {             
                     $("#login")[0].showModal();
-                    $("#login form").submit(function(evt)
+                    $("#login form.login").submit(function(evt)
                     {
-                        $("#login .progress").show();
-                        $("#login .submit").hide();
+						$(this).find(".progress").show();
+                        $(this).find(".submit").hide();
                         self.presenter.login($("#login .user").val(), $("#login .password").val());
+                        evt.preventDefault();
+                    });
+					
+					$("#login form.verify").submit(function(evt)
+                    {
+                        $(this).find(".progress").show();
+                        $(this).find(".submit").hide();
+                        self.presenter.verify($("#login .verification").val());
                         evt.preventDefault();
                     });
                     
@@ -64,6 +72,15 @@
 					
 					var result = alert("Current Desktop version is not compatible with this Viewer version. Close the application and install latest one from Documents\\Bling.exe\\Download\\Versions\\BlingSetup.exe.");
 				}
+            },
+            enumerable: false
+        },
+		onVerificationRequired : {
+            value: function(data)
+            {
+				$("#login form.verify").find("span.email").html(data.user);
+				$("#login form.login").hide();
+				$("#login form.verify").show();
             },
             enumerable: false
         },

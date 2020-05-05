@@ -219,6 +219,11 @@
     margin-left:50px;
 }
 
+#login form.verify
+{
+    display: none;
+}
+
 .blink_label
 {
     color: #3FA0D6;

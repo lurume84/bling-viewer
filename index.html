@@ -54,7 +54,7 @@
       </div>
       <dialog id="login" class="mdl-dialog">
         <h4 class="mdl-dialog__title"><img src="img/logo_white.png"/></h4>
-        <form action="#">
+        <form class="login" action="#">
           <div class="mdl-dialog__content">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
               <input class="mdl-textfield__input user" type="text" id="userInput"/>
@@ -64,14 +64,23 @@
                 <input class="mdl-textfield__input password" type="password" id="passwordInput"/>
                 <label class="mdl-textfield__label" for="passwordInput">Password...</label>
             </div>
-            
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                <span class="mdl-radio__label blink_label">blink</span>
-            </label>
           </div>
           <div class="mdl-dialog__actions">
             <button type="submit" class="mdl-button submit">Login</button>
+          </div>
+          <div class="progress mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+        </form>
+		<form class="verify" action="#">
+          <div class="mdl-dialog__content">
+			A verification code has been sent to <span class="email"></span>
+		  
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input verification" id="verificationInput"/>
+                <label class="mdl-textfield__label" for="verificationInput">Verification...</label>
+            </div>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="submit" class="mdl-button submit">Verify</button>
           </div>
           <div class="progress mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
         </form>

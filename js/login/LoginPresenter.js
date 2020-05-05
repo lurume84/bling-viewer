@@ -17,15 +17,18 @@
             value: function(user, password)
             {
                 var self = this;
-                    
-                this.interactor.login(user, password, new blink.listeners.BaseDecisionListener(
+                 
+				var uid = generate_uid(16);
+				var notification_key = generate_uid(152);
+				 
+                this.interactor.login(user, password, uid, notification_key, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        $.each( data.region, function( key, value )
-                        {
-                            credentials.region = key;
-                        });
-                        
+						data.user = user;
+						data.uid = uid;
+						data.notification_key = notification_key;
+						
+                        credentials.region = data.region.tier;
                         credentials.token = data.authtoken.authtoken;
 
                         if(data.account == undefined)
@@ -36,17 +39,42 @@
                         }
                         
                         credentials.account = data.account;
+                        credentials.client = data.client;
 
-                        self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(
-                                                function(data)
-                                                {
-                                                    
-                                                },
-                                                function(data)
-                                                {
-                                                    
-                                                }));
-                        self.getUser();   
+                        self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(function(data){}, function(data){}));
+                        
+						if(data.client.verification_required)
+						{
+							self.loginView.onVerificationRequired(data);
+						}
+						else
+						{
+							self.getUser();
+						} 
+                    },
+                    function(data)
+                    {
+                        self.loginView.showError(data);
+                    }));
+            },
+            enumerable: false
+        },
+		verify : {
+            value: function(key)
+            {
+                var self = this;
+                 
+                this.interactor.verify(key, new blink.listeners.BaseDecisionListener(
+                    function(data)
+                    {
+						if(data.valid)
+						{
+							self.getUser();
+						}
+						else
+						{
+							document.querySelector('#toast').MaterialSnackbar.showSnackbar({message: "Invalid pin", timeout: 10000});
+						}
                     },
                     function(data)
                     {
