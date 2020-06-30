@@ -17,7 +17,7 @@
 					data: {	"app_version":"6.0.7 (520300) #afb0be72a", "client_name": "Computer", 
 							"client_type": "android", "device_identifier": "Bling Desktop", 
 							"email": user, "notification_key": notification_key, "os_version": "5.1.1", "password": password, 
-							"reauth":true, "unique_id": uid},
+							"reauth":false, "unique_id": uid},
 					dataType: 'json',
 					beforeSend: function(xhr) { 
 						
