@@ -82,7 +82,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/liveview",
+					url: "https://rest-" + credentials.region + "." + server + "/api/v5/accounts/" + credentials.account.id + "/networks/" + network + "/cameras/" + camera + "/liveview",
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
@@ -128,7 +128,7 @@
 				$.ajax
 				({
 					type: "GET",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v3/networks/" + network + "/cameras/" + camera + "/join/" + command,
+					url: "https://rest-" + credentials.region + "." + server + "/api/v5/accounts/" + credentials.account.id + "/networks/" + network + "/cameras/" + camera + "/join/" + command,
                     dataType: 'json',
 					beforeSend: function(xhr) {                        
 						xhr.setRequestHeader("TOKEN_AUTH", credentials.token);
