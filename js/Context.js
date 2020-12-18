@@ -98,6 +98,27 @@ blink.listeners = blink.listeners || {};
                 return new blink.interactors.ActivityInteractor();
             },
             enumerable: false
+        },
+		getHomescreenPresenter : {
+            value: function()
+            {
+                return new blink.presenters.HomescreenPresenter(this);
+            },
+            enumerable: false
+        },
+        getHomescreenView : {
+            value: function(presenter)
+            {
+                return new blink.views.HomescreenView(presenter);
+            },
+            enumerable: false
+        },
+        getHomescreenInteractor : {
+            value: function()
+            {
+                return new blink.interactors.HomescreenInteractor();
+            },
+            enumerable: false
         }
     });
 

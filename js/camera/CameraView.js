@@ -172,6 +172,16 @@
             },
             enumerable: false
         },
+        onOwls : {
+            value: function(cameras)
+            {
+                $.each( cameras, function( key, value2 )
+                {
+                    self.presenter.getCamera(value2.network_id, value2.id, value2.name, self.load);
+                });
+            },
+            enumerable: false
+        },
         initContent : {
             value: function(card, data)
             {

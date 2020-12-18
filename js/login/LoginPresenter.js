@@ -7,6 +7,7 @@
         this.loginView = Context.getLoginView(this);
         this.loginView.init();
 
+        this.homescreenView = Context.getHomescreenPresenter().view;
         this.networkView = Context.getNetworkPresenter().networkView;
         this.activityView = Context.getActivityPresenter().activityView;
     }
@@ -125,6 +126,7 @@
                     function(data)
                     {
                         self.loginView.load(data);
+                        self.homescreenView.onLogin(data);
                         self.activityView.onLogin(data);
                         self.networkView.onLogin(data);
                     },
