@@ -13,7 +13,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://prod." + server + "/api/v4/account/login",
+					url: "https://rest-prod." + server + "/api/v5/account/login",
 					data: {	"app_version":"6.0.7 (520300) #afb0be72a", "client_name": "Computer", 
 							"client_type": "android", "device_identifier": "Bling Desktop", 
 							"email": user, "notification_key": notification_key, "os_version": "5.1.1", "password": password, 
@@ -40,7 +40,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v4/account/" + credentials.account.id + "/client/" + credentials.client.id + "/pin/verify/",
+					url: "https://rest-" + credentials.region + "." + server + "/api/v4/account/" + credentials.account.account_id + "/client/" + credentials.client.id + "/pin/verify/",
 					data: {"pin": key},
 					dataType: 'json',
 					beforeSend: function(xhr) {                        

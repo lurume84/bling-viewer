@@ -25,21 +25,25 @@
                 this.interactor.login(user, password, uid, notification_key, new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-						data.server = "rest-" + data.region.tier + "." + server;
+						data.server = "rest-" + data.account.tier + "." + server;
 						data.port = 443;
 						data.user = user;
 						data.uid = uid;
 						data.notification_key = notification_key;
 						
-                        credentials.region = data.region.tier;
-                        credentials.token = data.authtoken.authtoken;
+                        credentials.region = data.account.tier;
+                        credentials.token = data.auth.token;
                         credentials.account = data.account;
-                        credentials.client = data.client;
+                        credentials.client = {id: data.account.client_id, verification_required: data.account.client_verification_required};
+
+console.log(credentials)
 
                         self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(function(data){}, function(data){}));
                         
-						if(data.client.verification_required)
+						if(credentials.client.verification_required)
 						{
+                            console.log("onVerificationRequired")
+                            
 							self.loginView.onVerificationRequired(data);
 						}
 						else
@@ -87,7 +91,7 @@
                     function(data)
                     {
                         credentials.region = data.region.tier;
-                        credentials.token = data.authtoken.authtoken;
+                        credentials.token = data.auth.token;
                         credentials.account = data.account;
                         credentials.client = data.client;
 
