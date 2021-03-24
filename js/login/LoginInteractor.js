@@ -16,7 +16,7 @@
 					url: "https://rest-prod." + server + "/api/v5/account/login",
 					data: {	"app_version":"6.0.7 (520300) #afb0be72a", "client_name": "Computer", 
 							"client_type": "android", "device_identifier": "Bling Desktop", 
-							"email": user, "notification_key": notification_key, "os_version": "5.1.1", "password": password, 
+							"email": user, "os_version": "5.1.1", "password": password, 
 							"reauth":false, "unique_id": uid},
 					dataType: 'json',
 					beforeSend: function(xhr) { 

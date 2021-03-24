@@ -19,7 +19,7 @@
             {
                 var self = this;
                  
-				var uid = generate_uid(16);
+				var uid = "00000000-1111-0000-1111-00000000000";
 				var notification_key = generate_uid(152);
 				 
                 this.interactor.login(user, password, uid, notification_key, new blink.listeners.BaseDecisionListener(
@@ -36,14 +36,10 @@
                         credentials.account = data.account;
                         credentials.client = {id: data.account.client_id, verification_required: data.account.client_verification_required};
 
-console.log(credentials)
-
                         self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(function(data){}, function(data){}));
                         
 						if(credentials.client.verification_required)
 						{
-                            console.log("onVerificationRequired")
-                            
 							self.loginView.onVerificationRequired(data);
 						}
 						else
@@ -90,10 +86,10 @@ console.log(credentials)
                 this.interactor.getToken(new blink.listeners.BaseDecisionListener(
                     function(data)
                     {
-                        credentials.region = data.region.tier;
+                        credentials.region = data.account.tier;
                         credentials.token = data.auth.token;
                         credentials.account = data.account;
-                        credentials.client = data.client;
+                        credentials.client = {id: data.account.client_id, verification_required: data.account.client_verification_required};
 
                         self.getUser();
                     },
