@@ -35,6 +35,12 @@
                         credentials.token = data.auth.token;
                         credentials.account = data.account;
                         credentials.client = {id: data.account.client_id, verification_required: data.account.client_verification_required};
+                        
+                        //correction for desktop
+                        credentials.account.id = data.account.account_id;
+                        credentials.authtoken = {authtoken: credentials.token};
+                        data.account.id = data.account.account_id;
+                        data.authtoken = {authtoken: credentials.token};
 
                         self.interactor.setToken(data, new blink.listeners.BaseDecisionListener(function(data){}, function(data){}));
                         

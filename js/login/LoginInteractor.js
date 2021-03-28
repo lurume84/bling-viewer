@@ -40,7 +40,7 @@
 				$.ajax
 				({
 					type: "POST",
-					url: "https://rest-" + credentials.region + "." + server + "/api/v4/account/" + credentials.account.account_id + "/client/" + credentials.client.id + "/pin/verify/",
+					url: "https://rest-" + credentials.region + "." + server + "/api/v4/account/" + credentials.account.id + "/client/" + credentials.client.id + "/pin/verify/",
 					data: {"pin": key},
 					dataType: 'json',
 					beforeSend: function(xhr) {                        
